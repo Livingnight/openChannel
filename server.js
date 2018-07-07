@@ -17,7 +17,15 @@ mongoose.connect(MONGDB_URI, err => {
     else console.log('database connected!')
 });
 
+app.post('/add', (req, res) => {
+    const user = req.body;
+    console.log(`User: ${JSON.stringify(user.email)}`);
+    res.json({
+        ...req.body
+    })
+});
+
 app.listen(PORT, err => {
     if (err) console.log(err);
     else console.log(`Server connected on PORT: ${PORT}`);
-})
+});
