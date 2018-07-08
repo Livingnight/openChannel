@@ -6,14 +6,14 @@ module.exports = {
         db.User
             .find(req.query)
             .populate('goals')
-            .then(dbModel => res.json(dbModel))
+            .then(goals => res.json(goals))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
         db.User
             .findById(req.params.id)
             .populate('goals')
-            .then(dbModel => res.json(dbModel))
+            .then(User => res.json(User))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
