@@ -1,5 +1,7 @@
 import history from '../history/history';
 import auth0 from 'auth0-js';
+import axios from 'axios';
+
 import jwtDecode from 'jwt-decode';
 
 export default class Auth {
@@ -22,13 +24,27 @@ export default class Auth {
     login() {
         this.auth0.authorize();
     }
+    sendUserInfo = user => {
+        axios({
+            url: '/add',
+            method: "POST",
+            data: user
+        }).then( response => {
+            console.log(`Data: ${JSON.stringify(response)}`);
+
+        })
+            .catch( err => {
+                console.log(`Error: ${err}`);
+            })
+    };
 
     handleAuthentication() {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
                     if( err) console.log(err);
-                    console.log(user);
+                    // console.log(user);
+                    this.sendUserInfo(user);
                 });
                 // const userInfo =  jwtDecode(authResult.idToken);
                 // console.log(userInfo);
