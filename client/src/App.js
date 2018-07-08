@@ -65,7 +65,10 @@ export default class App extends Component {
                                 >
                                     Log Out
                                 </Button>
-                                    <h4>Welcome to our site! Click home to see your goals</h4>
+
+                                    <br/>
+
+                                    <h4>Welcome to openChannel!! </h4>
 
                                 </div>
                             )

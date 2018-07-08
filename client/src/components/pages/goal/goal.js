@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {GoalInput, NewGoalFormBtn } from '../../form'
-import {Container, Row, Col} from "../../Grid";
+import {GoalInput} from '../../form'
+import {Container, Row, Col,} from "../../Grid";
 import {Card, CardBody, CardHeader} from "../../card";
 import API from '../../../utils/API'
 
@@ -55,7 +55,8 @@ export default class Goal extends Component {
                            onChange={this.handleChange}
                 />
 
-                <NewGoalFormBtn/>
+                <button className={"btn btn-primary"} onClick={this.goalFormSubmit}>Create Goal</button>
+
                     </Col>
                 </Row>
                 <Row>

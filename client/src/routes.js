@@ -5,7 +5,7 @@ import Home from './components/pages/landing/home';
 import Callback from './components/callback/Callback';
 import Auth from './Auth/Auth';
 import history from './history/history';
-import Nav from './components/nav';
+import Nav from './components/Nav/Nav';
 import GoalItem from './components/goal-item/GoalItem';
 
 const auth = new Auth();
