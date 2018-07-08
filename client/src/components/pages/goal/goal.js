@@ -12,7 +12,7 @@ export default class Goal extends Component {
 
     };
     componentDidMount() {
-        this.loadGoals();
+        // this.loadGoals();
     }
     handleChange = event => {
         const { name, value} = event.target;
