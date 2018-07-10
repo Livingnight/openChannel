@@ -1,7 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-export const Card = ({children, ...props}) => (
-    <div className='card'>
-        {children}
-    </div>
-);
+export class Card extends React.Component {
+    render() {
+        // let className = '';
+        //
+        // if (this.props.className != undefined) {
+        //     className = this.props.className;
+        // }
+
+        return (
+            <div className={this.props.className} style={this.props.style}>
+                {this.props.children}
+            </div>
+        )
+    }
+};

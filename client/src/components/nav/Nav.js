@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 // import './App.css';
 
-export default class App extends Component {
+export default class Nav extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
@@ -30,14 +30,14 @@ export default class App extends Component {
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goal')}
+                            onClick={this.goTo.bind(this, 'goals')}
                         >
                             Goals
                         </Button>
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goalItem')}
+                            onClick={this.goTo.bind(this, 'goalItems')}
                         >
                             Goal Items
                         </Button>
