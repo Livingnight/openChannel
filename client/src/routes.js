@@ -12,18 +12,18 @@ const auth = new Auth();
 
 const handleAuthentication = (nextState, replace) => {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
-        auth.handleAuthentication();
+        auth.handleAuthentication()
     }
 }
 
 export const makeMainRoutes = () => {
+
     return (
         <div>
-        <Nav />
-
+        {/*<Nav />*/}
         <Router history={history} component={App}>
             <div>
-                <Route path="/" render={(props) => <App auth={auth} {...props} />} />
+                <Route path="/" render={(props) => <Nav auth={auth} {...props} />} />
                 <Route path="/goal" render={(props) => <Home auth={auth} {...props} />} />
                 <Route path="/goalItem" render={(props) => <GoalItem auth={auth} {...props}/>} />
                 <Route path="/callback" render={(props) => {
