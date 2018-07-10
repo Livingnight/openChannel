@@ -17,7 +17,7 @@ export default class Home extends Component {
     };
     componentDidMount() {
         // this.loadGoals();
-        this.getUser(localStorage.getItem("id_token"))
+        // this.getUser(localStorage.getItem("id_token"))
     }
     handleChange = event => {
         const { name, value} = event.target;
