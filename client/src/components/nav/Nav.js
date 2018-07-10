@@ -5,6 +5,7 @@ export const Nav = () => (
         <a className='navbar-brand' href='/home'>
             openChannel
         </a>
+        
     </nav>
 );
 
