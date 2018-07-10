@@ -19,7 +19,9 @@ export default class App extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (
+
             <div>
+                {console.log(this.props)}
                 <Navbar fluid>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -41,8 +43,8 @@ export default class App extends Component {
                         </Button>
                         {
                             !isAuthenticated() && (
-                                <div>
-                                <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
+                                //<div>
+                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
                                     bsStyle="primary"
@@ -51,12 +53,12 @@ export default class App extends Component {
                                 >
                                     Log In
                                 </Button>
-                                </div>
+                                // </div>
                             )
                         }
                         {
                             isAuthenticated() && (
-                                <div>
+                                /*<div>*/
                                 <Button
                                     id="qsLogoutBtn"
                                     bsStyle="primary"
@@ -65,9 +67,9 @@ export default class App extends Component {
                                 >
                                     Log Out
                                 </Button>
-                                    <h4>Welcome to our site! Click home to see your goals</h4>
+                                    // <h4>Welcome to our site! Click home to see your goals</h4>
 
-                                </div>
+                                // </div>
                             )
                         }
                     </Navbar.Header>

@@ -2,7 +2,6 @@ import history from '../history/history';
 import auth0 from 'auth0-js';
 import axios from 'axios';
 
-import jwtDecode from 'jwt-decode';
 
 export default class Auth {
     auth0 = new auth0.WebAuth({
@@ -41,11 +40,11 @@ export default class Auth {
     handleAuthentication() {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
-                    if( err) console.log(err);
-                    // console.log(user);
-                    this.sendUserInfo(user);
-                });
+                // this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
+                //     if( err) console.log(err);
+                //     console.log(user);
+                    // this.sendUserInfo(user.email);
+                // });
                 // const userInfo =  jwtDecode(authResult.idToken);
                 // console.log(userInfo);
                 this.setSession(authResult);
@@ -82,5 +81,8 @@ export default class Auth {
         // access token's expiry time
         let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
         return new Date().getTime() < expiresAt;
+    }
+    getUser() {
+
     }
 }
