@@ -9,7 +9,7 @@ export class Card extends React.Component {
         // }
 
         return (
-            <div className={this.props.className} style={this.props.style}>
+            <div className={this.props.className} >
                 {this.props.children}
             </div>
         )
