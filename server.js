@@ -11,6 +11,11 @@ const MONGDB_URI = process.env.MONGODB_URI || 'mongodb://localhost/openChannel';
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 mongoose.connect(MONGDB_URI, err => {
     if (err) console.log(err);
