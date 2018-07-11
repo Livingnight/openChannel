@@ -4,10 +4,15 @@ import axios from 'axios';
 
 
 export default class Auth {
+
+    getEnv() {
+        return process.env.NODE_ENV === "production" ? "https://murmuring-tor-51179.herokuapp.com/callback" : "http://localhost:3000/callback";
+    }
+
     auth0 = new auth0.WebAuth({
         domain: "openchannel.auth0.com",
         clientID: "tdleustS12Wv6ox689zVkwioM4tsXn4Z",
-        redirectUri: "http://localhost:3000/callback",
+        redirectUri: this.getEnv(),
         audience: "https://openchannel.auth0.com/userinfo",
         responseType: "token id_token",
         scope: "openid email profile"
