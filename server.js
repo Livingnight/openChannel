@@ -2,11 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const routes = require ('./routes');
 
 
 const app = express();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 const MONGDB_URI = process.env.MONGODB_URI || 'mongodb://localhost/openChannel';
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -16,6 +17,8 @@ mongoose.connect(MONGDB_URI, err => {
     if (err) console.log(err);
     else console.log('database connected!')
 });
+
+app.use(routes);
 
 app.listen(PORT, err => {
     if (err) console.log(err);

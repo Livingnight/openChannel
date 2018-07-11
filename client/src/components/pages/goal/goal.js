@@ -23,22 +23,25 @@ export default class Goal extends Component {
     };
     loadGoals = () => {
         API.getGoals()
-            .then( goal => {
-                this.setState({
-                    goals: goal.data
-                })
+            .then( res => {
+                this.setState({goals: res.data, title: ""})
             })
+            .catch(err => console.log(err));
 
     };
 
+
+
     goalFormSubmit = event => {
         event.preventDefault();
+        if (this.state.goals)
         API.saveGoal({
             title: this.state.goalInput
         })
             .then(response => {
                 this.loadGoals();
             })
+
     }
 
 
@@ -54,6 +57,13 @@ export default class Goal extends Component {
                            placeholder='Enter Goal Title'
                            onChange={this.handleChange}
                 />
+                        <CardHeader
+                            value={this.state.goals}
+                            onChange={this.handleChange}
+                            name="synopsis"
+                            placeholder="Synopsis (Optional)"
+                            />
+
 
                 <button className={"btn btn-primary"} onClick={this.goalFormSubmit}>Create Goal</button>
 
