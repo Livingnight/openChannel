@@ -19,7 +19,9 @@ export default class App extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (
+
             <div>
+                {console.log(this.props)}
                 <Navbar fluid>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -28,21 +30,21 @@ export default class App extends Component {
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goal')}
+                            onClick={this.goTo.bind(this, 'goals')}
                         >
                             Goals
                         </Button>
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goalItem')}
+                            onClick={this.goTo.bind(this, 'goalItems')}
                         >
                             Goal Items
                         </Button>
                         {
                             !isAuthenticated() && (
-                                <div>
-                                <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
+                                //<div>
+                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
                                     bsStyle="primary"
@@ -51,12 +53,12 @@ export default class App extends Component {
                                 >
                                     Log In
                                 </Button>
-                                </div>
+                                // </div>
                             )
                         }
                         {
                             isAuthenticated() && (
-                                <div>
+                                /*<div>*/
                                 <Button
                                     id="qsLogoutBtn"
                                     bsStyle="primary"
@@ -65,9 +67,9 @@ export default class App extends Component {
                                 >
                                     Log Out
                                 </Button>
-                                    <h4>Welcome to our site! Click home to see your goals</h4>
+                                    // <h4>Welcome to our site! Click home to see your goals</h4>
 
-                                </div>
+                                // </div>
                             )
                         }
                     </Navbar.Header>
