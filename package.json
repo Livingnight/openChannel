@@ -1,6 +1,6 @@
 {
   "name": "openChannel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "server.js",
   "license": "MIT",
   "scripts": {
@@ -12,6 +12,7 @@
     "build": "cd client && npm run build",
     "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push openchannel master",
     "server": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
