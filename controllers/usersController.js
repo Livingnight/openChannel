@@ -1,38 +1,39 @@
 const db = require("../models");
 
+
 // Defining methods for the booksController
 module.exports = {
     findAll: function(req, res) {
         db.User
             .find(req.query)
-            .populate('goals')
-            .then(goals => res.json(goals))
+            .sort({ date: -1 })
+            .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
         db.User
             .findById(req.params.id)
-            .populate('goals')
-            .then(User => res.json(User))
+            .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
         db.User
             .create(req.body)
-            .then( User => res.json(User))
+            .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
         db.User
             .findOneAndUpdate({ _id: req.params.id }, req.body)
-            .then(dbModel => res.json(dbModel))
+            .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
         db.User
             .findById({ _id: req.params.id })
-            .then(dbModel => dbModel.remove())
-            .then(dbModel => res.json(dbModel))
+            .then(dbopenChannel => dbopenChannel.remove())
+            .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     }
 };
+

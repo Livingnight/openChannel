@@ -36,7 +36,8 @@ export default class Goal extends Component {
         API.getGoals()
             .then(goal => {
                 this.setState({
-                    goals: goal.data
+                    goals: goal.data,
+                    goalInput: ''
                 })
             })
 
@@ -44,10 +45,12 @@ export default class Goal extends Component {
 
     goalFormSubmit = event => {
         event.preventDefault();
+        console.log('goal submit button was pressed');
         API.saveGoal({
             title: this.state.goalInput
         })
             .then(response => {
+                console.log(response);
                 this.loadGoals();
             })
     };
@@ -91,7 +94,7 @@ export default class Goal extends Component {
                                                onChange={this.handleChange}
                                     />
 
-                                    <NewGoalFormBtn >Create Goal</NewGoalFormBtn>
+                                    <NewGoalFormBtn onClick={this.goalFormSubmit}>Submit Goal</NewGoalFormBtn>
                                 </Col>
                             </Row>
 

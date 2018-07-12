@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 // import './App.css';
 
+
 export default class Nav extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
+
 
     login() {
         this.props.auth.login();
