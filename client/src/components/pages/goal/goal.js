@@ -76,14 +76,14 @@ export default class Goal extends Component {
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
-                                            <Card className={`card stuff`} style={styles.stuff}>
+                                            <Card className={`card stuff`}>
                                                 <CardHeader>These are the active goals</CardHeader>
                                                 <CardBody>Titles of Goals(click to see goal items)</CardBody>
                                             </Card>
                                         </Col>
                                         <Col size="sm-12">
                                             <Card className={'card'}>
-                                                <CardHeader className={'cardHeader stuff2'}>These are the completed goals</CardHeader>
+                                                <CardHeader className={'stuff'}>These are the completed goals</CardHeader>
                                                 <CardBody>Titles of Goals(click to see goal items)</CardBody>
                                             </Card>
                                         </Col>
@@ -97,7 +97,7 @@ export default class Goal extends Component {
                                                onChange={this.handleChange}
                                     />
 
-                                    <NewGoalFormBtn>Create Goal</NewGoalFormBtn>
+                                    <NewGoalFormBtn >Create Goal</NewGoalFormBtn>
                                 </Col>
                             </Row>
 
