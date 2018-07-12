@@ -1,6 +1,7 @@
 import history from '../history/history';
 import auth0 from 'auth0-js';
-import jwtDecode from 'jwt-decode';
+import axios from 'axios';
+
 
 export default class Auth {
     auth0 = new auth0.WebAuth({
@@ -22,20 +23,34 @@ export default class Auth {
     login() {
         this.auth0.authorize();
     }
+    sendUserInfo = user => {
+        axios({
+            url: '/add',
+            method: "POST",
+            data: user
+        }).then( response => {
+            console.log(`Data: ${JSON.stringify(response)}`);
+
+        })
+            .catch( err => {
+                console.log(`Error: ${err}`);
+            })
+    };
 
     handleAuthentication() {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
-                    if( err) console.log(err);
-                    console.log(user);
-                });
+                // this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
+                //     if( err) console.log(err);
+                //     console.log(user);
+                    // this.sendUserInfo(user.email);
+                // });
                 // const userInfo =  jwtDecode(authResult.idToken);
                 // console.log(userInfo);
                 this.setSession(authResult);
-                history.replace('/home');
+                history.replace('/');
             } else if (err) {
-                history.replace('/home');
+                history.replace('/');
                 console.log(err);
                 alert(`Error: ${err.error}. Check the console for further details.`);
             }
@@ -49,7 +64,7 @@ export default class Auth {
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
         // navigate to the home route
-        history.replace('/home');
+        history.replace('/');
     }
 
     logout() {
@@ -58,7 +73,7 @@ export default class Auth {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
         // navigate to the home route
-        history.replace('/home');
+        history.replace('/');
     }
 
     isAuthenticated() {
@@ -66,5 +81,8 @@ export default class Auth {
         // access token's expiry time
         let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
         return new Date().getTime() < expiresAt;
+    }
+    getUser() {
+
     }
 }

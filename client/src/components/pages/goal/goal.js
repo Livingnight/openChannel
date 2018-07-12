@@ -1,21 +1,35 @@
-import React, {Component} from 'react'
-import {GoalInput} from '../../form'
-import {Container, Row, Col,} from "../../Grid";
+import React, {Component} from 'react';
+// import Goal from '../goal/goal'
+import {Container, Col, Row} from "../../Grid";
+import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
-import API from '../../../utils/API'
-
+import jwtDecode from "jwt-decode";
+import styles from './goal.css';
+import API from "../../../utils/API";
 
 export default class Goal extends Component {
     state = {
         goalInput: '',
-        goals: []
+        goals: [],
+        items: [],
+        email: '',
+        user: '',
+        userId: '',
+        goalId: '',
+        itemId: ''
 
     };
+
     componentDidMount() {
-        this.loadGoals();
+        const { isAuthenticated } = this.props.auth;
+        if(this.props.auth.isAuthenticated()){
+            this.getUser(localStorage.getItem("id_token"))
+        }
+
     }
+
     handleChange = event => {
-        const { name, value} = event.target;
+        const {name, value} = event.target;
         console.log(`name: ${name}, value: ${value}`);
         this.setState({
             [name]: value
@@ -23,68 +37,94 @@ export default class Goal extends Component {
     };
     loadGoals = () => {
         API.getGoals()
-            .then( res => {
-                this.setState({goals: res.data, title: ""})
+            .then(goal => {
+                this.setState({
+                    goals: goal.data,
+                    goalInput: ''
+                })
             })
-            .catch(err => console.log(err));
 
     };
 
-
-
     goalFormSubmit = event => {
         event.preventDefault();
-        if (this.state.goals)
+        console.log('goal submit button was pressed');
         API.saveGoal({
             title: this.state.goalInput
         })
             .then(response => {
+                console.log(response);
                 this.loadGoals();
             })
-
+    };
+    getUser = token => {
+        const userInfo = jwtDecode(token);
+        console.log(userInfo);
+        this.setState({
+            email: userInfo.email
+        })
     }
 
+    login() {
+        this.props.auth.login();
+    }
 
     render() {
+        const {isAuthenticated} = this.props.auth;
         return (
-            <Container fluid>
-                <Row>
-                    <Col size="sm-3"></Col>
-                    <Col size="sm-6">
-                <h1>New Goal</h1>
-                <GoalInput value={this.state.email}
-                           name='goalInput'
-                           placeholder='Enter Goal Title'
-                           onChange={this.handleChange}
-                />
-                        <CardHeader
-                            value={this.state.goals}
-                            onChange={this.handleChange}
-                            name="synopsis"
-                            placeholder="Synopsis (Optional)"
-                            />
+            <div>
+                {
+                    isAuthenticated() && (
+                        <Container fluid>
+                            <Row>
+                                <Col size='sm-6'>
+                                    <Row>
+                                        <Col size="sm-12">
+                                            <Card className={`card stuff`} style={styles.stuff}>
+                                                <CardHeader>These are the active goals</CardHeader>
+                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col size="sm-12">
+                                            <Card className={'card'}>
+                                                <CardHeader className={'cardHeader stuff2'}>These are the completed goals</CardHeader>
+                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                <Col size="sm-6">
+                                    <h1>New Goal</h1>
+                                    <GoalInput value={this.state.goalInput}
+                                               name='goalInput'
+                                               placeholder='Enter Goal Title'
+                                               onChange={this.handleChange}
+                                    />
+
+                                    <NewGoalFormBtn onClick={this.goalFormSubmit}>Submit Goal</NewGoalFormBtn>
+                                </Col>
+                            </Row>
 
 
-                <button className={"btn btn-primary"} onClick={this.goalFormSubmit}>Create Goal</button>
+                        </Container>
 
-                    </Col>
-                </Row>
-                <Row>
-                    <Col size="sm-3"></Col>
-                    <Col size="sm-6">
-                    <Card>
-                        <CardHeader>These are the goals</CardHeader>
-                        <CardBody>Titles of Goals(click to see goal items)</CardBody>
-                    </Card>
-                    </Col>
-                </Row>
-
-
-            </Container>
-
-
-
-
-        )
+                    )
+                }
+                {
+                    !isAuthenticated() && (
+                        <h4>
+                            You are not logged in! Please{' '}
+                            <a
+                                style={{cursor: 'pointer'}}
+                                onClick={this.login.bind(this)}
+                            >
+                                Log In
+                            </a>
+                            {' '}to continue.
+                        </h4>
+                    )
+                }
+            </div>
+        );
     }
 }

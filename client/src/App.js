@@ -19,7 +19,9 @@ export default class App extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (
+
             <div>
+                {console.log(this.props)}
                 <Navbar fluid>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -28,14 +30,14 @@ export default class App extends Component {
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goal')}
+                            onClick={this.goTo.bind(this, 'goals')}
                         >
                             Goals
                         </Button>
                         <Button
                             bsStyle="primary"
                             className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goalItem')}
+                            onClick={this.goTo.bind(this, 'goalItems')}
                         >
                             Goal Items
                         </Button>
@@ -69,8 +71,9 @@ export default class App extends Component {
                                     <br/>
 
                                     <h4>Welcome to openChannel!! </h4>
+                                    // <h4>Welcome to our site! Click home to see your goals</h4>
 
-                                </div>
+                                // </div>
                             )
                         }
                     </Navbar.Header>

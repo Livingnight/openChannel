@@ -3,7 +3,14 @@ import axios from 'axios'
 export default {
 
     getGoals: () => {
-        return axios.get('/api/goals');
+        return axios.get('/api/goals')
+            .then(function (response) {
+                console.log(response);
+                return response;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
 
     saveGoal: data => {
@@ -18,7 +25,7 @@ export default {
     },
 
     updateGoal: id => {
-        return axios.put(`api/goals/${id}`)
+        return axios.put(`/api/goals/${id}`)
             .then(function (response) {
                 console.log(response);
                 return response;
