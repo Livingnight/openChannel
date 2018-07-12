@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-// import Goal from '../goal/goal'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
-import jwtDecode from "jwt-decode";
 import styles from './goal.css';
 import API from "../../../utils/API";
 export default class Goal extends Component {
@@ -21,8 +19,8 @@ export default class Goal extends Component {
 
     componentDidMount() {
         const { isAuthenticated } = this.props.auth;
-        if(this.props.auth.isAuthenticated()){
-            this.getUser(localStorage.getItem("id_token"))
+        if(isAuthenticated()){
+            this.getUser(localStorage.getItem("user_email"))
         }
 
     }
@@ -54,11 +52,7 @@ export default class Goal extends Component {
             })
     };
     getUser = token => {
-        const userInfo = jwtDecode(token);
-        console.log(userInfo);
-        this.setState({
-            email: userInfo.email
-        })
+        console.log(localStorage.getItem('user_email'));
     }
 
     login() {
@@ -83,7 +77,7 @@ export default class Goal extends Component {
                                         </Col>
                                         <Col size="sm-12">
                                             <Card className={'card'}>
-                                                <CardHeader className={'stuff'}>These are the completed goals</CardHeader>
+                                                <CardHeader style={styles.stuff}>These are the completed goals</CardHeader>
                                                 <CardBody>Titles of Goals(click to see goal items)</CardBody>
                                             </Card>
                                         </Col>

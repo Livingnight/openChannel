@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-// import Goal from '../goal/goal'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
-import {Card, CardBody, CardHeader} from "../../card";
-import jwtDecode from "jwt-decode";
+import {Card, CardBody} from "../../card";
 import API from "../../../utils/API";
 
 export default class Home extends Component {
@@ -19,7 +17,7 @@ export default class Home extends Component {
 
     };
     componentDidMount() {
-        // this.loadGoals();
+        this.loadGoals();
         if(this.props.auth.isAuthenticated()){
             this.getUser(localStorage.getItem("id_token"))
         }
@@ -35,6 +33,7 @@ export default class Home extends Component {
     loadGoals = () => {
         API.getGoals()
             .then( goal => {
+                console.log(goal);
                 this.setState({
                     goals: goal.data
                 })
@@ -51,12 +50,8 @@ export default class Home extends Component {
                 this.loadGoals();
             })
     };
-    getUser = token => {
-        const userInfo = jwtDecode(token);
-        console.log(userInfo);
-        this.setState({
-            email: userInfo.email
-        })
+    getUser = () => {
+        console.log(localStorage.getItem('user_email'));
     }
     login() {
         this.props.auth.login();

@@ -1,6 +1,5 @@
 import history from '../history/history';
 import auth0 from 'auth0-js';
-import axios from 'axios';
 
 
 export default class Auth {
@@ -15,7 +14,7 @@ export default class Auth {
         redirectUri: this.getEnv(),
         audience: "https://openchannel.auth0.com/userinfo",
         responseType: "token id_token",
-        scope: "openid email profile"
+        scope: "openid email"
     });
 
     constructor() {
@@ -28,30 +27,10 @@ export default class Auth {
     login() {
         this.auth0.authorize();
     }
-    sendUserInfo = user => {
-        axios({
-            url: '/add',
-            method: "POST",
-            data: user
-        }).then( response => {
-            console.log(`Data: ${JSON.stringify(response)}`);
-
-        })
-            .catch( err => {
-                console.log(`Error: ${err}`);
-            })
-    };
 
     handleAuthentication() {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                // this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
-                //     if( err) console.log(err);
-                //     console.log(user);
-                    // this.sendUserInfo(user.email);
-                // });
-                // const userInfo =  jwtDecode(authResult.idToken);
-                // console.log(userInfo);
                 this.setSession(authResult);
                 history.replace('/');
             } else if (err) {
@@ -68,6 +47,7 @@ export default class Auth {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('user_email', authResult.idTokenPayload.email);
         // navigate to the home route
         history.replace('/');
     }
@@ -77,6 +57,7 @@ export default class Auth {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('user_email');
         // navigate to the home route
         history.replace('/');
     }

@@ -21,7 +21,6 @@ export default class App extends Component {
         return (
 
             <div>
-                {console.log(this.props)}
                 <Navbar fluid>
                     <Navbar.Header>
                         <Navbar.Brand>
