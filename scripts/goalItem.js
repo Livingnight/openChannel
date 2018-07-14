@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-mongoose.connect( process.env.MONGODB_URI ||
-    'mongodb://localhost/openChannel'
-)
-// db.Goal.findById("5b414ddb10bead0bb4ec22a8")
-//     .then( goal => {
-//         console.log(goal);
+// mongoose.connect( process.env.MONGODB_URI ||
+//     'mongodb://localhost/openChannel'
+// )
+// db.Goal.findByItem("5b414ddb10bead0bb4ec22a8")
+//     .then( item => {
+//         console.log(item);
 //         db.Item.create({
 //             text: "Silver likes carrots",
 //             author: {
-//                 id: goal.author.id,
+//                 id: item,
 //                 email: goal.author.email
 //             }
 //         }).then( goalItem => {
@@ -21,9 +21,25 @@ mongoose.connect( process.env.MONGODB_URI ||
 //                 console.log(err);
 //             })
 //     })
+const GoalItemSchema = new mongoose.Schema({
+    author: String,
+    title: {
+        type: String,
+        required: true
+    },
 
-db.Goal.findOne( {_id: "5b414ddb10bead0bb4ec22a8"})
-    .populate('items')
-.then( goal => {
-    console.log(goal)
+    goals: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "GoalItem"
+    }]
 });
+
+const GoalItem = mongoose.model("Goal Item", GoalItemSchema);
+
+modue.exports = GoalItem;
+
+db.User.findOne({_id: "orellanaleo8@gmail.com"})
+    .populate('GoalItems')
+    .then(user => console.log(user.items))
+    .catch(err => console.log(err));
+
