@@ -5,13 +5,12 @@ const ItemSchema = new mongoose.Schema({
     text: {
         type: String
     },
-    author: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        email: String
+    author: String,
+    complete: {
+        type: Boolean,
+        default: false
     }
+
 
 });
 

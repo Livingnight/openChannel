@@ -2,9 +2,9 @@ import axios from 'axios'
 
 export default {
 
-    getGoals: email => {
-        console.log(email);
-        return axios.get('/api/goals/', {params: {author: email}})
+    getItems: id => {
+        console.log(id);
+        return axios.get('/api/items', {params: {_id: id}})
             .then(function (response) {
                 console.log(response);
                 return response;
@@ -14,8 +14,8 @@ export default {
             });
     },
 
-    saveGoal: data => {
-        return axios.post('/api/goals', data)
+    saveItem: (id, data) => {
+        return axios.post(`/api/items/${id}`, data)
             .then(function (response) {
                 console.log(response);
                 return response;
@@ -25,8 +25,8 @@ export default {
             });
     },
 
-    updateGoal: (id, data)=> {
-        return axios.put(`/api/goals/:id`, data)
+    updateItem: (id, data)=> {
+        return axios.put(`/api/items/${id}`, data)
             .then(function (response) {
                 console.log(response);
                 return response;
@@ -37,8 +37,8 @@ export default {
 
     },
 
-    deleteGoal: id => {
-        return axios.delete(`/api/goals/${id}`)
+    deleteItem: id => {
+        return axios.delete(`/api/items/${id}`)
             .then(function (response) {
                 console.log(response);
                 return response;

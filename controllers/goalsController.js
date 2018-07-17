@@ -5,9 +5,14 @@ const db = require("../models");
 module.exports = {
     findAll: function(req, res) {
         db.Goal
-            .find(req.query)
-            .sort({ date: -1 })
-            .then(dbopenChannel => res.json(dbopenChannel))
+            .find()
+            .populate('items')
+            // .sort({ date: -1 })
+            .then(dbopenChannel =>
+
+                // console.log(dbopenChannel.filter( goal => goal.author === 'jjernigan1065@gmail.com')))
+                    // console.log(findUser);
+                res.json(dbopenChannel.filter( goal => goal.author === req.query.author)))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
@@ -17,8 +22,12 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
+        const {title, email} = req.body;
         db.Goal
-            .create(req.body)
+            .create({
+                title: title,
+                author: email
+            })
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },

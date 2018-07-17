@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
-import API from "../../../utils/API";
+import API from "../../../utils/allEmployeeAPI";
 
 export default class Home extends Component {
     state = {
         goalInput: '',
         goals: [],
         items: [],
-        email: '',
+        email: 'allEmployees',
         user: '',
         userId: '',
         goalId: '',
@@ -17,7 +17,7 @@ export default class Home extends Component {
 
     };
     componentDidMount() {
-        this.loadGoals();
+        this.loadGoals(this.state.email);
         if(this.props.auth.isAuthenticated()){
             this.getUser(localStorage.getItem("id_token"))
         }
@@ -30,8 +30,8 @@ export default class Home extends Component {
             [name]: value
         })
     };
-    loadGoals = () => {
-        API.getGoals()
+    loadGoals = (email) => {
+        API.getGoals(email)
             .then( goal => {
                 console.log(goal);
                 this.setState({
@@ -47,7 +47,7 @@ export default class Home extends Component {
             title: this.state.goalInput
         })
             .then(response => {
-                this.loadGoals();
+                this.loadGoals(this.state.email);
             })
     };
     getUser = () => {

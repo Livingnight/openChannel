@@ -3,12 +3,12 @@ const itemsController = require("../../controllers/itemsController");
 
 // Matches with "/api/"
 router.route("/")
-    .get(itemsController.findAll)
-    .post(itemsController.create);
+    .get(itemsController.findAll);
 
 // Matches with "/api/:id"
 router
     .route("/:id")
+    .post(itemsController.create)
     .get(itemsController.findById)
     .put(itemsController.update)
     .delete(itemsController.remove);

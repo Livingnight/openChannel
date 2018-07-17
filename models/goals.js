@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
 
 const GoalSchema = new mongoose.Schema({
-    author: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        email: String
-
-    },
+    author: String,
     title: {
         type: String,
         required: true
     },
-
+    complete: {
+        type: Boolean,
+        default: false
+    },
     items: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item"

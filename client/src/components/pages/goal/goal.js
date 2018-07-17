@@ -1,28 +1,35 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
 import styles from './goal.css';
 import API from "../../../utils/API";
+
 export default class Goal extends Component {
     state = {
         goalInput: '',
         goals: [],
         items: [],
+        showModal: false,
         email: '',
-        user: '',
-        userId: '',
         goalId: '',
         itemId: ''
 
     };
 
-    componentDidMount() {
+    componentWillMount() {
         const { isAuthenticated } = this.props.auth;
         if(isAuthenticated()){
             this.getUser(localStorage.getItem("user_email"))
         }
-
+        this.loadGoals(localStorage.getItem("user_email"));
+    }
+    componentDidMount() {
+        // const { isAuthenticated } = this.props.auth;
+        // if(isAuthenticated()){
+        //     this.getUser(localStorage.getItem("user_email"))
+        // }
     }
 
     handleChange = event => {
@@ -32,9 +39,18 @@ export default class Goal extends Component {
             [name]: value
         })
     };
-    loadGoals = () => {
-        API.getGoals()
+    deleteGoal = id => {
+        API.deleteGoal(id)
+            .then( goal => {
+                console.log(goal);
+                this.loadGoals(this.state.email);
+            })
+    }
+    loadGoals = (email) => {
+        console.log(email);
+        API.getGoals(email)
             .then(goal => {
+                console.log(`Goals: ${goal.data}`);
                 this.setState({
                     goals: goal.data,
                     goalInput: ''
@@ -45,18 +61,21 @@ export default class Goal extends Component {
 
     goalFormSubmit = event => {
         event.preventDefault();
-        console.log('goal submit button was pressed');
         API.saveGoal({
-            title: this.state.goalInput
+            title: this.state.goalInput,
+            email: this.state.email
         })
             .then(response => {
-                console.log(response);
-                this.loadGoals();
+                console.log(`response: ${response}`);
+                this.loadGoals(this.state.email);
             })
     };
-    getUser = token => {
-        console.log(localStorage.getItem('user_email'));
-    }
+    getUser = () => {
+        // console.log(localStorage.getItem('user_email'));
+        this.setState({
+            email: localStorage.getItem('user_email')
+        })
+    };
 
     login() {
         this.props.auth.login();
@@ -75,7 +94,26 @@ export default class Goal extends Component {
                                         <Col size="sm-12">
                                             <Card className={`card stuff`}>
                                                 <CardHeader>These are the active goals</CardHeader>
-                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
+                                                <CardBody>
+                                                    {this.state.goals.length ? (
+                                                        <Card>
+
+                                                            {this.state.goals.map((goal, i) => (
+                                                                <h3 key={i}>
+                                                                    <Link to={{
+                                                                        pathname: `/goalItem/${goal._id}`,
+                                                                        state: {test: this.state.goals[i]}
+                                                                    }}>{goal.title}</Link>
+                                                                    <button onClick={() => this.deleteGoal(goal._id)} className={`btn btn-warning`}>Delete
+                                                                    </button>
+                                                                </h3>
+
+                                                            ))}
+                                                        </Card>
+                                                    ) : (
+                                                        <h3>Nothing to display yet</h3>
+                                                    )}
+                                                </CardBody>
                                             </Card>
                                         </Col>
                                         <Col size="sm-12">

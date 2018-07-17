@@ -2,7 +2,7 @@ import history from '../history/history';
 import auth0 from 'auth0-js';
 
 
-export default class Auth {
+export default class Auth{
 
     getEnv() {
         return process.env.NODE_ENV === "production" ? "https://murmuring-tor-51179.herokuapp.com/callback" : "http://localhost:3000/callback";

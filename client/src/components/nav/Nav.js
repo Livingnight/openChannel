@@ -36,17 +36,8 @@ export default class Nav extends Component {
                         >
                             Goals
                         </Button>
-                        <Button
-                            bsStyle="primary"
-                            className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goalItems')}
-                        >
-                            Goal Items
-                        </Button>
                         {
                             !isAuthenticated() && (
-                                //<div>
-                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
                                     bsStyle="primary"
@@ -55,12 +46,10 @@ export default class Nav extends Component {
                                 >
                                     Log In
                                 </Button>
-                                // </div>
                             )
                         }
                         {
                             isAuthenticated() && (
-                                /*<div>*/
                                 <Button
                                     id="qsLogoutBtn"
                                     bsStyle="primary"
@@ -69,9 +58,6 @@ export default class Nav extends Component {
                                 >
                                     Log Out
                                 </Button>
-                                // <h4>Welcome to our site! Click home to see your goals</h4>
-
-                                // </div>
                             )
                         }
                     </Navbar.Header>

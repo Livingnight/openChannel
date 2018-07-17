@@ -25,8 +25,8 @@ export default {
             });
     },
 
-    updateGoal: (id, data)=> {
-        return axios.put(`/api/goals/:id`, data)
+    updateGoal: id => {
+        return axios.put(`/api/goals/${id}`)
             .then(function (response) {
                 console.log(response);
                 return response;
@@ -38,7 +38,7 @@ export default {
     },
 
     deleteGoal: id => {
-        return axios.delete(`/api/goals/${id}`)
+        return axios.delete(`/api/goals/:${id}`)
             .then(function (response) {
                 console.log(response);
                 return response;
