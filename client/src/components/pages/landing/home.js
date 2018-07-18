@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
 import API from "../../../utils/allEmployeeAPI";
+
 
 export default class Home extends Component {
     state = {
@@ -69,8 +71,10 @@ export default class Home extends Component {
                                     <h1>Pipeline</h1>
 
                                     <Card>
+
                                         <CardBody>
-                                            <h3>
+
+                                                <h3>
 
                                                 Do you see any Teletubbies in here? Do you see a slender plastic tag
                                                 clipped to my shirt with my name printed on it? Do you see a little
@@ -80,7 +84,9 @@ export default class Home extends Component {
                                                 store, because you're here shopping for an infant named Jeb.
 
                                             </h3>
+
                                         </CardBody>
+
                                     </Card>
                                     <GoalInput
                                         value={this.state.goalInput}
