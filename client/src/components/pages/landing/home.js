@@ -5,6 +5,7 @@ import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
 import jwtDecode from "jwt-decode";
+// import 'home.css'
 import API from "../../../utils/API";
 
 export default class Home extends Component {

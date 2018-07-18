@@ -9,6 +9,7 @@ import Auth from './Auth/Auth';
 import history from './history/history';
 import Nav from './components/Nav/Nav';
 import GoalItem from './components/goal-item/GoalItem';
+import './components/pages/landing/home.css';
 
 const auth = new Auth();
 
