@@ -37,8 +37,10 @@ export default {
 
     },
 
-    deleteItem: id => {
-        return axios.delete(`/api/items/${id}`)
+    deleteItem: (id, data )=> {
+
+        console.log(`id: ${id}, data: ${JSON.stringify(data)}`);
+        return axios.delete(`/api/items/${id}`, {params: data})
             .then(function (response) {
                 console.log(response);
                 return response;

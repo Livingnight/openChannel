@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
-import itemAPI from '../../../utils/itemAPI'
+import API from '../../../utils/API';
+import itemAPI from '../../../utils/itemAPI';
+import {TextArea} from "../../form/TextArea";
 
 export default class GoalItem extends Component {
     state = {
         goal: this.props.location.state.test,
         email: this.props.location.state.test.author,
         id: this.props.location.state.test._id,
+        textarea: this.props.location.state.test.description,
         actionInput: ''
     };
 
@@ -25,12 +28,35 @@ export default class GoalItem extends Component {
 
     }
 
+    handleDescriptionUpdate(id, data) {
+        console.log(`id: ${id} data: ${JSON.stringify(data)}`);
+        console.log('clicked');
+        API.updateGoal(id, data)
+            .then(goal => {
+                console.log(goal)
+            }).then(response => {
+            this.loadGoal(id);
+        })
+
+    }
     handleChange = event => {
         const {name, value} = event.target;
         console.log(`name: ${name}, value: ${value}`);
         this.setState({
             [name]: value
         })
+    };
+    loadGoal = (id) => {
+        console.log(id);
+        API.getGoal(id)
+            .then(goal => {
+                console.log(`Goals: ${goal.data}`);
+                this.setState({
+                    goals: goal.data,
+                    goalInput: ''
+                })
+            })
+
     };
     loadItems = (id) => {
         console.log(id);
@@ -43,6 +69,14 @@ export default class GoalItem extends Component {
                 })
             })
     };
+    deleteItem = (id, data) => {
+        console.log(id);
+        itemAPI.deleteItem(id, data)
+            .then(items => {
+                console.log(items);
+                this.loadItems(this.state.id);
+            })
+    }
     itemFormSubmit = event => {
         event.preventDefault();
         console.log('button works');
@@ -65,18 +99,51 @@ export default class GoalItem extends Component {
                     isAuthenticated() && (
                         <Container fluid>
                             <Row>
+                                <Col size="sm-12">
+
+                                    <h1 style={{textAlign: "center"}}>{this.state.goal.title}</h1>
+
+                                    <Row>
+                                        <Col size='sm-4'></Col>
+                                        <Col size='sm-4'>
+                                            <TextArea placeholder={'further describe your purpose'}
+                                                      value={this.state.textarea} onChange={this.handleChange}/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col size='sm-5'></Col>
+                                        <Col size={'sm-1'}>
+                                            <button
+                                                onClick={() => this.handleDescriptionUpdate(this.state.id, {description: this.state.textarea})}>Update
+                                            </button>
+
+                                        </Col>
+                                        <Col size={'sm-1'}>
+                                            <button>Mark Complete</button>
+
+                                        </Col>
+                                        <Col size='sm-5'></Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <Row>
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
                                             <h1>Items</h1>
                                             <Card className={`card stuff`}>
-                                                <CardHeader>{this.state.goal.title}</CardHeader>
                                                 <CardBody>
                                                     {this.state.goal.items.length > 0 ? (
                                                         <div>
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
-                                                                    <p>{item.text}</p>
+                                                                    <p>
+                                                                        {item.text}
+                                                                        <button
+                                                                            onClick={() => this.deleteItem(item._id, {id: this.state.id})}
+                                                                            className={`btn btn-warning`}>Delete
+                                                                        </button>
+                                                                    </p>
                                                                 </Card>
                                                             ))}
 

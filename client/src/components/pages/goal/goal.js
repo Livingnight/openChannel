@@ -70,6 +70,13 @@ export default class Goal extends Component {
                 this.loadGoals(this.state.email);
             })
     };
+    handleComplete = (id, data) => {
+        console.log('data', data);
+        API.updateGoal(id, data)
+            .then(response => {
+                this.loadGoals(this.state.email);
+            })
+    }
     getUser = () => {
         // console.log(localStorage.getItem('user_email'));
         this.setState({
@@ -92,6 +99,7 @@ export default class Goal extends Component {
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
+                                            <h1>Goals</h1>
                                             <Card className={`card stuff`}>
                                                 <CardHeader>These are the active goals</CardHeader>
                                                 <CardBody>
@@ -99,14 +107,26 @@ export default class Goal extends Component {
                                                         <Card>
 
                                                             {this.state.goals.map((goal, i) => (
-                                                                <h3 key={i}>
-                                                                    <Link to={{
-                                                                        pathname: `/goalItem/${goal._id}`,
-                                                                        state: {test: this.state.goals[i]}
-                                                                    }}>{goal.title}</Link>
-                                                                    <button onClick={() => this.deleteGoal(goal._id)} className={`btn btn-warning`}>Delete
-                                                                    </button>
-                                                                </h3>
+                                                                !goal.complete &&
+
+
+                                                                    <CardBody key={i}>
+                                                                        <h3>{goal.title}
+                                                                            <Link to={{
+                                                                                pathname: `/goalItem/${goal._id}`,
+                                                                                state: {test: this.state.goals[i]}
+                                                                            }}>
+                                                                                <button
+                                                                                    className={'btn btn-success'}>Manage
+                                                                                </button>
+                                                                            </Link>
+                                                                        </h3>
+
+
+
+
+                                                                    </CardBody>
+
 
                                                             ))}
                                                         </Card>
@@ -117,9 +137,34 @@ export default class Goal extends Component {
                                             </Card>
                                         </Col>
                                         <Col size="sm-12">
-                                            <Card className={'card'}>
-                                                <CardHeader style={styles.stuff}>These are the completed goals</CardHeader>
-                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
+                                            <h1>Goals</h1>
+                                            <Card className={`card stuff`}>
+                                                <CardHeader>These are the completed goals</CardHeader>
+                                                <CardBody>
+                                                    {this.state.goals.length ? (
+                                                        <Card>
+
+                                                            {this.state.goals.map((goal, i) => (
+                                                                goal.complete &&
+                                                                <CardBody key={i}>
+                                                                    <h3>{goal.title}
+                                                                        <Link to={{
+                                                                            pathname: `/goalItem/${goal._id}`,
+                                                                            state: {test: this.state.goals[i]}
+                                                                        }}>
+                                                                            <button
+                                                                                className={'btn btn-success'}>Manage
+                                                                            </button>
+                                                                        </Link>
+                                                                    </h3>
+                                                                </CardBody>
+
+                                                            ))}
+                                                        </Card>
+                                                    ) : (
+                                                        <h3>Nothing to display yet</h3>
+                                                    )}
+                                                </CardBody>
                                             </Card>
                                         </Col>
                                     </Row>

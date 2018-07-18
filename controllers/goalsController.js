@@ -8,16 +8,16 @@ module.exports = {
             .find()
             .populate('items')
             // .sort({ date: -1 })
-            .then(dbopenChannel =>
-
-                // console.log(dbopenChannel.filter( goal => goal.author === 'jjernigan1065@gmail.com')))
-                    // console.log(findUser);
-                res.json(dbopenChannel.filter( goal => goal.author === req.query.author)))
+            .then(dbopenChannel => {
+                const filter = dbopenChannel.filter(goal => goal.author === req.query.author);
+                res.json(filter)
+            })
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
         db.Goal
             .findById(req.params.id)
+
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
@@ -32,16 +32,31 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
+        console.log(req.body)
         db.Goal
-            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .findOneAndUpdate({ _id: req.params.id },
+                 req.body
+            )
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
         db.Goal
             .findById({ _id: req.params.id })
-            .then(dbopenChannel => dbopenChannel.remove())
-            .then(dbopenChannel => res.json(dbopenChannel))
+            .then(dbopenChannel => {
+                dbopenChannel.remove();
+                // db.Item.remove({"goalId": ObjectId(`${req.params.id}`)});
+
+            })
+            .then(deleteItems => {
+                db.Item.find({goalId: req.params.id})
+                    .then( items =>{
+                        console.log(items);
+                        items.remove();
+                    })
+                    .then(response => res.json(response))
+                    .catch(e => res.json(e));
+            })
             .catch(err => res.status(422).json(err));
     }
 };
