@@ -15,13 +15,18 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
+
         db.Goal
+        db.Item
+
+
             .findById(req.params.id)
             .populate('items')
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
+
         db.Goal
             .findById(req.params.id)
             .then( goal => {
@@ -36,15 +41,24 @@ module.exports = {
                     res.status(422).json(err);
                 })
             })
+
+        db.Item
+
+            .create(req.body)
+            .then(dbopenChannel => res.json(dbopenChannel))
+            .catch(err => res.status(422).json(err));
+
     },
     update: function(req, res) {
         db.Item
+
             .findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
         db.Item
+
             .findById({ _id: req.params.id })
             .then(dbopenChannel => dbopenChannel.remove())
             .then(dbopenChannel => res.json(dbopenChannel))

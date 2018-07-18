@@ -1,48 +1,27 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-mongoose.connect(
-    process.env.MONGODB_URI ||
-    'mongodb://localhost/openChannel'
-)
+// mongoose.connect(
+//     process.env.MONGODB_URI ||
+//     'mongodb://localhost/openChannel'
+// )
 
-// const userGoal = {
-//     author: {
-//         author: {
-//             id: user._id,
-//             email: user.email
-//         },
-//         title: "Hi Ho Silver",
-//         items: []
-//
-//     }
-// }
+const GoalSchema = new mongoose.Schema({
+    author: String,
+    title: {
+        type: String,
+        required: true
+    },
 
-// db.Goal.create({
-//     title: "Hi Ho Silver"
-// })
-// db.User.findById("5b40ea1ebbcc131ae0e54d95")
-//     .then(user => {
-//         console.log(user);
-//         db.Goal.create({
-//             author: {
-//                 id: user._id,
-//                 email: user.email
-//             },
-//             title: "Hi Ho Silver",
-//             items: []
-//
-//         })
-//             .then(goalItem => {
-//                 // console.log(`Goal Item: ${goalItem}`)
-//                 console.log(`Goal item: ${user.email}`);
-//                 user.goals.push(goalItem);
-//                 user.save();
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//             })
-//     });
+    items: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item"
+    }]
+});
+
+const Goal = mongoose.model('Goal', GoalSchema);
+
+module.exports = Goal;
 db.User.findOne({"email":"jjernigan1065@gmail.com"})
  .populate('goals')
 .then(user => console.log(user.goals))
