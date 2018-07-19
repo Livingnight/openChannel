@@ -5,6 +5,7 @@ import {Card, CardBody, CardHeader} from "../../card";
 import API from '../../../utils/API';
 import itemAPI from '../../../utils/itemAPI';
 import {TextArea} from "../../form/TextArea";
+import {TextBox} from "../../form/text-box";
 
 export default class GoalItem extends Component {
     state = {
@@ -77,6 +78,26 @@ export default class GoalItem extends Component {
                 this.loadItems(this.state.id);
             })
     }
+    handleGoalComplete = (id, data) => {
+        console.log('data', data);
+        API.updateGoal(id, data)
+            .then(response => {
+                this.loadGoal(this.state.id);
+            })
+    };
+    handleItemComplete = (id, data) => {
+        console.log('id:', id);
+        console.log('data:', data);
+        itemAPI.updateItem(id, data)
+            .then( response => {
+                this.loadGoal(this.state.id);
+            })
+
+    };
+    setStyle = (complete) => {
+        let style;
+        complete ? style={'text-decoration': 'line-through'} : ''
+    }
     itemFormSubmit = event => {
         event.preventDefault();
         console.log('button works');
@@ -91,6 +112,9 @@ export default class GoalItem extends Component {
     };
     render() {
         const {isAuthenticated} = this.props.auth;
+        const style = {
+            'text-decoration': this
+        }
 
         return (
             <div>
@@ -119,7 +143,9 @@ export default class GoalItem extends Component {
 
                                         </Col>
                                         <Col size={'sm-1'}>
-                                            <button>Mark Complete</button>
+                                            <button onClick={() => this.handleGoalComplete(this.state.id, {complete: !this.state.goal.complete})}>
+                                                {!this.state.goal.complete ? 'In Progress' : 'Completed'}
+                                            </button>
 
                                         </Col>
                                         <Col size='sm-5'></Col>
@@ -137,13 +163,17 @@ export default class GoalItem extends Component {
                                                         <div>
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
-                                                                    <p>
-                                                                        {item.text}
+                                                                    <CardBody>
+                                                                        <h4 style={{'text-decoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
                                                                         <button
                                                                             onClick={() => this.deleteItem(item._id, {id: this.state.id})}
                                                                             className={`btn btn-warning`}>Delete
                                                                         </button>
-                                                                    </p>
+                                                                        <TextBox
+                                                                            checked={item.complete}
+                                                                            onClick={() => this.handleItemComplete(item._id, {complete: !item.complete})}
+                                                                        />
+                                                                    </CardBody>
                                                                 </Card>
                                                             ))}
 

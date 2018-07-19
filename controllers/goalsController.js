@@ -17,7 +17,7 @@ module.exports = {
     findById: function(req, res) {
         db.Goal
             .findById(req.params.id)
-
+            .populate('items')
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));
     },

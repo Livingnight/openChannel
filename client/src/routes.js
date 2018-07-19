@@ -35,8 +35,8 @@ export const makeMainRoutes = () => {
 
                 <Route path="/goalItem" render={(props) => <GoalItem auth={auth} {...props}/>} />
 
-//                 <Route path="/items" render ={(props) => <Items auth={auth} {...props} />} />
-//                 <Route path="/goalItems" render={(props) => <GoalItem auth={auth} {...props}/>} />
+                 <Route path="/items" render ={(props) => <Items auth={auth} {...props} />} />
+                 <Route path="/goalItems" render={(props) => <GoalItem auth={auth} {...props}/>} />
 
                 <Route path="/callback" render={(props) => {
                     handleAuthentication(props);
