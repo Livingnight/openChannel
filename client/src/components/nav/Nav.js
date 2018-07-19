@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import './Nav.css';
+<<<<<<< HEAD
 import logo from "../../images/openChannel_logo.png";
+=======
+// import './App.css';
+>>>>>>> 543a840106943816009e8b51066a2662d92b763f
+
 
 export default class Nav extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
+
 
     login() {
         this.props.auth.login();
@@ -36,6 +42,7 @@ export default class Nav extends Component {
                         >
                             Goals
                         </Button>
+<<<<<<< HEAD
                         <Button
                             bsStyle="link"
                             className="btn-margin"
@@ -43,10 +50,10 @@ export default class Nav extends Component {
                         >
                             Goal Items
                         </Button>
+=======
+>>>>>>> 543a840106943816009e8b51066a2662d92b763f
                         {
                             !isAuthenticated() && (
-                                //<div>
-                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
                                     bsStyle="link"
@@ -55,14 +62,12 @@ export default class Nav extends Component {
                                 >
                                     Log In
                                 </Button>
-                                // </div>
                             )
                             
                         }
                         </div>
                         {
                             isAuthenticated() && (
-                                /*<div>*/
                                 <Button
                                     id="qsLogoutBtn"
                                     bsStyle="link"
@@ -71,9 +76,6 @@ export default class Nav extends Component {
                                 >
                                     Log Out
                                 </Button>
-                                // <h4>Welcome to our site! Click home to see your goals</h4>
-
-                                // </div>
                             )
                         }
                     </Navbar.Header>

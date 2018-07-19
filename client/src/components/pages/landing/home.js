@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-// import Goal from '../goal/goal'
+
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
-import {Card, CardBody, CardHeader} from "../../card";
-import jwtDecode from "jwt-decode";
-import API from "../../../utils/API";
+import {Card, CardBody} from "../../card";
+import API from "../../../utils/allEmployeeAPI";
+
 
 export default class Home extends Component {
     state = {
         goalInput: '',
         goals: [],
         items: [],
-        email: '',
+        email: 'allEmployees',
         user: '',
         userId: '',
         goalId: '',
@@ -19,7 +19,7 @@ export default class Home extends Component {
 
     };
     componentDidMount() {
-        // this.loadGoals();
+        this.loadGoals(this.state.email);
         if(this.props.auth.isAuthenticated()){
             this.getUser(localStorage.getItem("id_token"))
         }
@@ -32,9 +32,10 @@ export default class Home extends Component {
             [name]: value
         })
     };
-    loadGoals = () => {
-        API.getGoals()
+    loadGoals = (email) => {
+        API.getGoals(email)
             .then( goal => {
+                console.log(goal);
                 this.setState({
                     goals: goal.data
                 })
@@ -48,15 +49,11 @@ export default class Home extends Component {
             title: this.state.goalInput
         })
             .then(response => {
-                this.loadGoals();
+                this.loadGoals(this.state.email);
             })
     };
-    getUser = token => {
-        const userInfo = jwtDecode(token);
-        console.log(userInfo);
-        this.setState({
-            email: userInfo.email
-        })
+    getUser = () => {
+        console.log(localStorage.getItem('user_email'));
     }
     login() {
         this.props.auth.login();
@@ -74,8 +71,10 @@ export default class Home extends Component {
                                     <h1>Pipeline</h1>
 
                                     <Card>
+
                                         <CardBody>
-                                            <h3>
+
+                                                <h3>
 
                                                 Do you see any Teletubbies in here? Do you see a slender plastic tag
                                                 clipped to my shirt with my name printed on it? Do you see a little
@@ -84,7 +83,9 @@ export default class Home extends Component {
                                                 that's what you see at a toy store. And you must think you're in a toy
                                                 store, because you're here shopping for an infant named Jeb.
                                             </h3>
+
                                         </CardBody>
+
                                     </Card>
                                     <GoalInput
                                         value={this.state.goalInput}
