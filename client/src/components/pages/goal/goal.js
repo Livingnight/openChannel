@@ -25,12 +25,12 @@ export default class Goal extends Component {
         }
         this.loadGoals(localStorage.getItem("user_email"));
     }
-    componentDidMount() {
+    // componentDidMount() {
         // const { isAuthenticated } = this.props.auth;
         // if(isAuthenticated()){
         //     this.getUser(localStorage.getItem("user_email"))
         // }
-    }
+    // }
 
     handleChange = event => {
         const {name, value} = event.target;
@@ -70,13 +70,13 @@ export default class Goal extends Component {
                 this.loadGoals(this.state.email);
             })
     };
-    handleComplete = (id, data) => {
-        console.log('data', data);
-        API.updateGoal(id, data)
-            .then(response => {
-                this.loadGoals(this.state.email);
-            })
-    }
+    // handleComplete = (id, data) => {
+    //     console.log('data', data);
+    //     API.updateGoal(id, data)
+    //         .then(response => {
+    //             this.loadGoals(this.state.email);
+    //         })
+    // }
     getUser = () => {
         // console.log(localStorage.getItem('user_email'));
         this.setState({

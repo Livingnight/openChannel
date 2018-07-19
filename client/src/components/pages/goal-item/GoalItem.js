@@ -53,7 +53,7 @@ export default class GoalItem extends Component {
             .then(goal => {
                 console.log(`Goals: ${goal.data}`);
                 this.setState({
-                    goals: goal.data,
+                    goal: goal.data,
                     goalInput: ''
                 })
             })
@@ -82,6 +82,7 @@ export default class GoalItem extends Component {
         console.log('data', data);
         API.updateGoal(id, data)
             .then(response => {
+                console.log(response);
                 this.loadGoal(this.state.id);
             })
     };
