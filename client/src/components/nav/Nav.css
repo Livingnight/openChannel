@@ -1,0 +1,33 @@
+.Navbar {
+    background: #3A1741;
+    font-family: quicksand;
+}
+
+
+.btn-margin{
+    color: white;
+    
+}
+
+.btn-margin:hover{
+    color: #B4FEA2;
+}
+
+img {
+    max-width: 200px;
+}
+
+.navbar-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 576px){
+    .navbar-header{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: initial;
+    }
+}
