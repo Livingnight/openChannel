@@ -6,6 +6,7 @@ import API from '../../../utils/API';
 import itemAPI from '../../../utils/itemAPI';
 import {TextArea} from "../../form/TextArea";
 import {TextBox} from "../../form/text-box";
+// import "GoalItem.css";
 
 export default class GoalItem extends Component {
     state = {

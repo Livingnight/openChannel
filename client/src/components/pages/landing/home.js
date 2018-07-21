@@ -149,7 +149,7 @@ export default class Home extends Component {
 
                                 <Col size='6'>
                                     <div className="loginColumn">
-                                    <img src={openChannel} alt="openChannel2" className="openChannel" width={'400'}/>
+                                    <img src={openChannel} alt="openChannel2" className="openChannel" width={'40%'}/>
                                     <a
                                         style={{cursor: 'pointer'}}
                                         onClick={this.login.bind(this)}
