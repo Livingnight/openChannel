@@ -7,6 +7,7 @@ import styles from './item.css';
 import API from "../../../utils/API";
 import {ItemInput} from "../../form/item-input";
 import {NewItemFormBtn} from "../../form/newItemFormBtn";
+import Navi from "../../nav/Nav";
 
 export default class Item extends Component {
     state = {
@@ -74,6 +75,7 @@ export default class Item extends Component {
         const {isAuthenticated} = this.props.auth;
         return (
             <div>
+                <Navi/>
                 {
                     isAuthenticated() && (
                         <Container fluid>

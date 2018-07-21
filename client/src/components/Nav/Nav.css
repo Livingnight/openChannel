@@ -1,3 +1,6 @@
-.nav-heading{
-    color: green;
+ul li{
+    display: inline;
+}
+li p{
+    display: inline;
 }

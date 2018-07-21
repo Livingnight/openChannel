@@ -1,12 +1,11 @@
-import axios from 'axios'
+import axios from "axios/index";
 
 export default {
-
-    getGoals: allEmployee => {
+    getAllEmployeeItems: allEmployee => {
         console.log(allEmployee);
-        return axios.get('/api/AllEmployees', {params: {allEmployee: allEmployee}})
+        return axios.get('/api/AllEmployeeItems')
             .then(function (response) {
-                console.log(response);
+                console.log('find all: ', response);
                 return response;
             })
             .catch(function (error) {
@@ -14,10 +13,10 @@ export default {
             });
     },
 
-    saveGoal: data => {
-        return axios.post('/api/AllEmployees', data)
+    saveAllEmployeeItem: (id, data) => {
+        return axios.post(`/api/AllEmployeeItems/${id}`, data)
             .then(function (response) {
-                console.log(response);
+                console.log('save: ', response);
                 return response;
             })
             .catch(function (error) {
@@ -25,10 +24,10 @@ export default {
             });
     },
 
-    updateGoal: id => {
-        return axios.put(`/api/AllEmployees/${id}`)
+    updateAllEmployeeItem: id => {
+        return axios.put(`/api/AllEmployeeItems/${id}`)
             .then(function (response) {
-                console.log(response);
+                console.log('update: ', response);
                 return response;
             })
             .catch(function (error) {
@@ -37,10 +36,10 @@ export default {
 
     },
 
-    deleteGoal: id => {
-        return axios.delete(`/api/AllEmployees/:${id}`)
+    deleteAllEmployeeItem: id => {
+        return axios.delete(`/api/AllEmployeeItems/:${id}`)
             .then(function (response) {
-                console.log(response);
+                console.log('delete: ', response);
                 return response;
             })
             .catch(function (error) {

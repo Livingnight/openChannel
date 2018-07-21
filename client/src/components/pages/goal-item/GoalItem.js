@@ -6,7 +6,9 @@ import API from '../../../utils/API';
 import itemAPI from '../../../utils/itemAPI';
 import {TextArea} from "../../form/TextArea";
 import {TextBox} from "../../form/text-box";
-import "./GoalItem.css";
+
+import Navi from "../../nav/Nav";
+
 
 export default class GoalItem extends Component {
     state = {
@@ -120,7 +122,7 @@ export default class GoalItem extends Component {
 
         return (
             <div>
-
+                {/*<Navi auth={this.props.auth}/>*/}
                 {
                     isAuthenticated() && (
                         <Container fluid>

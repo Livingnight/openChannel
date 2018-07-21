@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Navbar, Button } from 'react-bootstrap';
-// import './Nav.css';
+import { Navbar, Button, Nav, NavItem } from 'react-bootstrap';
+import './Nav.css';
+
 // import './App.css';
 
 
-export default class Nav extends Component {
+export default class Navi extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
@@ -23,56 +24,51 @@ export default class Nav extends Component {
 
         return (
 
-            <div>
-
-                {isAuthenticated() ?
-                    <div>
-                        {console.log(this.props)}
-                        <Navbar fluid>
-                            <Navbar.Header>
-                                <Navbar.Brand>
-                                    <a href="/">openChannel</a>
-                                </Navbar.Brand>
+                <Navbar fluid>
+                    <Navbar.Header>
+                        <ul>
+                        <Navbar.Brand>
+                            <a href="/">openChannel</a>
+                        </Navbar.Brand>
+                        <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={this.goTo.bind(this, 'goals')}
+                        >
+                            Actions
+                        </Button>
+                        {
+                            !isAuthenticated() && (
                                 <Button
+                                    id="qsLoginBtn"
+                                    bsStyle="primary"
+                                    className="btn-margin"
+                                    onClick={this.login.bind(this)}
+                                >
+                                    Log In
+                                </Button>
+                            )
+                        }
+                        {
+                            isAuthenticated() && (
+
+                                <li><Button
+                                    id="qsLogoutBtn"
+
                                     bsStyle="primary"
                                     className="btn-margin"
                                     onClick={this.goTo.bind(this, 'goals')}
                                 >
-                                    Goals
+                                    {/*<p>Logged in as {localStorage.getItem('user_email')}</p>*/}
+                                    Log Out
                                 </Button>
-                                {
-                                    !isAuthenticated() && (
-                                        <Button
-                                            id="qsLoginBtn"
-                                            bsStyle="primary"
-                                            className="btn-margin"
-                                            onClick={this.login.bind(this)}
-                                        >
-                                            Log In
-                                        </Button>
-                                    )
-                                }
-                                {
-                                    isAuthenticated() && (
-                                        <Button
-                                            id="qsLogoutBtn"
-                                            bsStyle="primary"
-                                            className="btn-margin"
-                                            onClick={this.logout.bind(this)}
-                                        >
-                                            Log Out
-                                        </Button>
-                                    )
-                                }
-                            </Navbar.Header>
-                        </Navbar>
-                    </div>
-                :
-                    null
-                }
+                                <p>Logged in as {localStorage.getItem('user_email')}</p></li>
 
-            </div>
-
+                            )
+                        }
+                        </ul>
+                    </Navbar.Header>
+                </Navbar>
 
         );
     }

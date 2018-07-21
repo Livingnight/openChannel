@@ -7,6 +7,7 @@ import './goal.css';
 import styles from './goal.css';
 
 import API from "../../../utils/API";
+import Navi from "../../nav/Nav";
 
 export default class Goal extends Component {
     state = {
@@ -65,7 +66,8 @@ export default class Goal extends Component {
         event.preventDefault();
         API.saveGoal({
             title: this.state.goalInput,
-            email: this.state.email
+            allEmployee: false,
+            author: this.state.email
         })
             .then(response => {
                 console.log(`response: ${response}`);
@@ -94,6 +96,7 @@ export default class Goal extends Component {
         const {isAuthenticated} = this.props.auth;
         return (
             <div>
+                {/*<Navi auth={this.props.auth}/>*/}
                 {
                     isAuthenticated() && (
                         <Container fluid>
