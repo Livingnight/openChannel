@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
-import API from "../../../utils/allEmployeeAPI";
+import API from "../../../utils/API";
+import itemAPI from '../../../utils/itemAPI'
 
 
 export default class Home extends Component {
     state = {
         goalInput: '',
-        goals: [],
+        goals: {},
         items: [],
-        email: 'allEmployees',
-        user: '',
-        userId: '',
-        goalId: '',
-        itemId: ''
+        author: '',
+        allEmployee: 'AllEmployees',
 
     };
-    componentDidMount() {
-        this.loadGoals(this.state.email);
+    componentWillMount() {
+        this.loadGoals();
         if(this.props.auth.isAuthenticated()){
             this.getUser(localStorage.getItem("id_token"))
         }
@@ -32,29 +30,35 @@ export default class Home extends Component {
             [name]: value
         })
     };
-    loadGoals = (email) => {
-        API.getGoals(email)
+    loadGoals = () => {
+        API.getAllEmployeeGoals()
             .then( goal => {
-                console.log(goal);
+                console.log('goal: ', goal);
                 this.setState({
-                    goals: goal.data
+                    goalInput: '',
+                    goals: goal.data[0],
+                    items: goal.data[0].items,
+                    author: goal.data[0].author,
+
                 })
             })
 
     };
 
-    goalFormSubmit = event => {
+    feedbackFormSubmit = event => {
         event.preventDefault();
-        API.saveGoal({
-            title: this.state.goalInput
+        itemAPI.saveItem(this.state.goals._id, {
+            text: this.state.goalInput,
+            author: this.state.author
         })
             .then(response => {
-                this.loadGoals(this.state.email);
+                console.log(response);
+                this.loadGoals();
             })
     };
     getUser = () => {
         console.log(localStorage.getItem('user_email'));
-    }
+    };
     login() {
         this.props.auth.login();
     }
@@ -65,7 +69,10 @@ export default class Home extends Component {
             <div>
                 {
                     isAuthenticated() && (
+
                         <Container fluid>
+                            {/*<Navi auth={this.props.auth}/>*/}
+
                             <Row>
                                 <Col size="sm-6">
                                     <h1>Pipeline</h1>
@@ -74,16 +81,20 @@ export default class Home extends Component {
 
                                         <CardBody>
 
-                                                <h3>
+                                                {/*<h3>*/}
 
-                                                Do you see any Teletubbies in here? Do you see a slender plastic tag
-                                                clipped to my shirt with my name printed on it? Do you see a little
-                                                Asian child with a blank expression on his face sitting outside on a
-                                                mechanical helicopter that shakes when you put quarters in it? No? Well,
-                                                that's what you see at a toy store. And you must think you're in a toy
-                                                store, because you're here shopping for an infant named Jeb.
+                                                {/*Do you see any Teletubbies in here? Do you see a slender plastic tag*/}
+                                                {/*clipped to my shirt with my name printed on it? Do you see a little*/}
+                                                {/*Asian child with a blank expression on his face sitting outside on a*/}
+                                                {/*mechanical helicopter that shakes when you put quarters in it? No? Well,*/}
+                                                {/*that's what you see at a toy store. And you must think you're in a toy*/}
+                                                {/*store, because you're here shopping for an infant named Jeb.*/}
 
-                                            </h3>
+                                                {/*</h3>*/}
+                                            {this.state.goals ?
+                                                <h3>{this.state.goals.title}</h3> :
+                                                <h3>Nothing to display</h3>
+                                            }
 
                                         </CardBody>
 
@@ -94,36 +105,25 @@ export default class Home extends Component {
                                         placeholder='Feedback'
                                         onChange={this.handleChange}
                                     />
-                                    <NewGoalFormBtn>Add Feedback </NewGoalFormBtn>
-                                    <NewGoalFormBtn>Take Action </NewGoalFormBtn>
+                                    <NewGoalFormBtn onClick={this.feedbackFormSubmit}>Add Feedback</NewGoalFormBtn>
+                                    <Link to={'/goals'}><NewGoalFormBtn>Take Action </NewGoalFormBtn></Link>
                                 </Col>
 
                                 <Col size='sm-6'>
                                     <h1>Feedback</h1>
-                                    <Card>
-                                        <CardBody>
-                                            <strong><em>employee@gmail.com</em></strong>
-                                            <p>Thats a dumb thing to say</p>
-                                        </CardBody>
-                                    </Card>
-                                    <Card>
-                                        <CardBody>
-                                            <strong><em>employee@gmail.com</em></strong>
-                                            <p>Thats a dumb thing to say</p>
-                                        </CardBody>
-                                    </Card>
-                                    <Card>
-                                        <CardBody>
-                                            <strong><em>employee@gmail.com</em></strong>
-                                            <p>Thats a dumb thing to say</p>
-                                        </CardBody>
-                                    </Card>
-                                    <Card>
-                                        <CardBody>
-                                            <strong><em>employee@gmail.com</em></strong>
-                                            <p>Thats a dumb thing to say</p>
-                                        </CardBody>
-                                    </Card>
+                                    {this.state.goals.items ?
+                                        this.state.goals.items.map( (item, i) => (
+                                            <Card key={i}>
+                                                {item.author}
+                                                {item.text}
+                                            </Card>
+                                        )) :
+                                        <Card>
+                                            <p>No items to display yet</p>
+                                        </Card>
+                                    }
+
+
                                 </Col>
                             </Row>
 

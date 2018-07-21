@@ -9,22 +9,15 @@ mongoose.connect(
 
 const userSeed = [
     {
-        email: "jjernigan1065@gmail.com",
-        goals: []
+        author: "jjernigan1065@gmail.com",
+        allEmployee: true,
+        title: 'testing all employess',
     },
-    {
-        email: "orellanaleo8@gmail.com",
-        goals: []
-    },
-    {
-        email: "johnbarson@gmail.com",
-        goals: []
-    }
-];
 
-db.User
+];
+    db.Goal
     .remove({})
-    .then( () => db.User.insertMany(userSeed))
+    .then( () => db.Goal.insertMany(userSeed))
     .then( data => {
         console.log(data);
         process.exit(0);

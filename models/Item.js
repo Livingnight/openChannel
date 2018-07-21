@@ -21,7 +21,7 @@ const ItemSchema = new mongoose.Schema({
     },
     created: {
         type: String,
-        default: moment().format('DD/MM/YYYY')
+        default: moment()
     }
 
 

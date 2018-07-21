@@ -7,9 +7,22 @@ module.exports = {
         db.Goal
             .find()
             .populate('items')
-            // .sort({ date: -1 })
+            .sort({ created: -1 })
             .then(dbopenChannel => {
-                const filter = dbopenChannel.filter(goal => goal.author === req.query.author);
+
+                const filter = dbopenChannel.filter(goal => goal.author === req.query.author && goal.allEmployee === false);
+                res.json(filter)
+            })
+            .catch(err => res.status(422).json(err));
+    },
+    findAllEmployee: function(req,res) {
+        db.Goal
+            .find()
+            .populate('items')
+            .sort({ created: -1 })
+            .then(dbopenChannel => {
+
+                const filter = dbopenChannel.filter(goal => goal.allEmployee === true);
                 res.json(filter)
             })
             .catch(err => res.status(422).json(err));
@@ -22,11 +35,12 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-        const {title, email} = req.body;
+        const {title, author, allEmployee} = req.body;
         db.Goal
             .create({
-                title: title,
-                author: email
+                title,
+                allEmployee,
+                author
             })
             .then(dbopenChannel => res.json(dbopenChannel))
             .catch(err => res.status(422).json(err));

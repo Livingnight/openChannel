@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Button } from 'react-bootstrap';
+import { Navbar, Button, Nav, NavItem } from 'react-bootstrap';
 import './Nav.css';
 // import './App.css';
 
 
-export default class Nav extends Component {
+export default class Navi extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
@@ -23,10 +23,9 @@ export default class Nav extends Component {
 
         return (
 
-            <div>
-                {console.log(this.props)}
                 <Navbar fluid>
                     <Navbar.Header>
+                        <ul>
                         <Navbar.Brand>
                             <a href="/">openChannel</a>
                         </Navbar.Brand>
@@ -35,7 +34,7 @@ export default class Nav extends Component {
                             className="btn-margin"
                             onClick={this.goTo.bind(this, 'goals')}
                         >
-                            Goals
+                            Actions
                         </Button>
                         {
                             !isAuthenticated() && (
@@ -51,19 +50,23 @@ export default class Nav extends Component {
                         }
                         {
                             isAuthenticated() && (
-                                <Button
+
+                                <li><Button
                                     id="qsLogoutBtn"
                                     bsStyle="primary"
                                     className="btn-margin"
                                     onClick={this.logout.bind(this)}
                                 >
+                                    {/*<p>Logged in as {localStorage.getItem('user_email')}</p>*/}
                                     Log Out
                                 </Button>
+                                <p>Logged in as {localStorage.getItem('user_email')}</p></li>
+
                             )
                         }
+                        </ul>
                     </Navbar.Header>
                 </Navbar>
-            </div>
         );
     }
 }

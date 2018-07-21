@@ -6,7 +6,8 @@ router.route("/")
     .get(goalsController.findAll)
     .post(goalsController.create);
 
-
+router.route('/all')
+    .get(goalsController.findAllEmployee);
 router
     .route("/:id")
     .get(goalsController.findById)
