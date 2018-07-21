@@ -24,6 +24,7 @@ export default class Goal extends Component {
             this.getUser(localStorage.getItem("user_email"))
         }
         this.loadGoals(localStorage.getItem("user_email"));
+        console.log(styles);
     }
     // componentDidMount() {
     // const { isAuthenticated } = this.props.auth;
@@ -99,9 +100,9 @@ export default class Goal extends Component {
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
-                                            <h1>GOALS</h1>
-                                            <Card className={`card stuff`}>
-                                                <CardHeader>These are the active goals</CardHeader>
+                                            <h1>Working on...</h1>
+                                            <Card className="cardStuff">
+                                                {/* <CardHeader>These are the active goals</CardHeader> */}
                                                 <CardBody>
                                                     {this.state.goals.length ? (
                                                         <Card>
@@ -111,16 +112,16 @@ export default class Goal extends Component {
 
 
                                                                 <CardBody key={i}>
-                                                                    <h3>{goal.title}
+                                                                    <p>{goal.title}
                                                                         <Link to={{
                                                                             pathname: `/goalItem/${goal._id}`,
                                                                             state: { test: this.state.goals[i] }
                                                                         }}>
                                                                             <button
-                                                                                className={'btn btn-success'}>Manage
+                                                                                className={`btn btn-success manageBtn`}>Manage
                                                                                 </button>
                                                                         </Link>
-                                                                    </h3>
+                                                                    </p>
 
 
 
@@ -137,9 +138,9 @@ export default class Goal extends Component {
                                             </Card>
                                         </Col>
                                         <Col size="sm-12">
-                                            <h1>Goals</h1>
-                                            <Card className={`card stuff`}>
-                                                <CardHeader>These are the completed goals</CardHeader>
+                                            <h1>Completed</h1>
+                                            <Card className="cardStuff">
+                                                {/* <CardHeader>These are the completed goals</CardHeader> */}
                                                 <CardBody>
                                                     {this.state.goals.length ? (
                                                         <Card>
@@ -170,13 +171,13 @@ export default class Goal extends Component {
                                 <Col size="sm-6">
                                     <div className="newGoalSection">
                                         <h2>New Goal</h2>
-                                        <GoalInput value={this.state.goalInput}
+                                        <GoalInput className="feedbackDisplay"value={this.state.goalInput}
                                             name='goalInput'
                                             placeholder='Enter Goal Title'
                                             onChange={this.handleChange}
                                         />
 
-                                        <NewGoalFormBtn onClick={this.goalFormSubmit}>Submit Goal</NewGoalFormBtn>
+                                        <NewGoalFormBtn className= "manageBtn"onClick={this.goalFormSubmit}>Add new goal</NewGoalFormBtn>
                                     </div>
                                 </Col>
                             </Row>

@@ -14,3 +14,43 @@ h2 {
     padding: 30px 0px 0px 30px;
     margin-bottom: 0px;
     }
+
+.cardStuff{
+    color: white;
+    border: 2px solid #2FD2B0;
+    border-radius: 12px;
+    margin-left: 20px;
+    width: 42vw;
+    margin-top: 15px;
+}
+
+/* .card-body {
+    margin: 0px !important;
+    padding: 0px !important;
+} */
+
+.feedbackDisplay{
+    color: white;
+    background-color: #106374;
+    border: 2px solid #2FD2B0;
+    border-radius: 12px;
+    margin-left: 20px;
+    width: 42vw;
+    height: 50vh;
+    margin-top: 15px;
+}
+
+.manageBtn{
+    background-color: #39C4B6 !important;
+    border-color: #39C4B6 !important;
+    border-radius: 20px !important;
+    display: flex;
+    justify-content: space-between !important;
+    /* float: right; */
+}
+
+.addNew {
+    background-color: #39C4B6 !important;
+    border-color: #39C4B6 !important;
+    border-radius: 20px !important;
+}
