@@ -1,3 +1,25 @@
 .Navbar {
-    color: #3A1741;
+    background-color: #3A1741;
+}
+.navbar-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
+}
+.nav-buttons {
+    font-family: 'Quicksand', sans-serif;
+    float: right;
+}
+
+.logo {
+   max-width: 40%;
+}
+
+.btn-margin {
+    color: white;
+}
+
+.btn-margin:hover {
+    color: #B4FEA2;
 }
