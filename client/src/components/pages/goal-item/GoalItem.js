@@ -6,7 +6,7 @@ import API from '../../../utils/API';
 import itemAPI from '../../../utils/itemAPI';
 import {TextArea} from "../../form/TextArea";
 import {TextBox} from "../../form/text-box";
-// import "GoalItem.css";
+import "./GoalItem.css";
 
 export default class GoalItem extends Component {
     state = {
@@ -124,10 +124,12 @@ export default class GoalItem extends Component {
                 {
                     isAuthenticated() && (
                         <Container fluid>
+                            <div className='goalItempage'>
                             <Row>
+
                                 <Col size="sm-12">
 
-                                    <h1 style={{textAlign: "center"}}>{this.state.goal.title}</h1>
+                                    <button className='description' style={{textAlign: "center"}}>{this.state.goal.title}</button>
 
                                     <Row>
                                         <Col size='sm-4'></Col>
@@ -139,13 +141,13 @@ export default class GoalItem extends Component {
                                     <Row>
                                         <Col size='sm-5'></Col>
                                         <Col size={'sm-1'}>
-                                            <button
+                                            <button className='updateButton'
                                                 onClick={() => this.handleDescriptionUpdate(this.state.id, {description: this.state.textarea})}>Update
                                             </button>
 
                                         </Col>
                                         <Col size={'sm-1'}>
-                                            <button onClick={() => this.handleGoalComplete(this.state.id, {complete: !this.state.goal.complete})}>
+                                            <button className='inProgress' onClick={() => this.handleGoalComplete(this.state.id, {complete: !this.state.goal.complete})}>
                                                 {!this.state.goal.complete ? 'In Progress' : 'Completed'}
                                             </button>
 
@@ -154,10 +156,12 @@ export default class GoalItem extends Component {
                                     </Row>
                                 </Col>
                             </Row>
+                                <br/>
                             <Row>
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
+                                            <div className='itemsSection'>
                                             <h1>Items</h1>
                                             <Card className={`card stuff`}>
                                                 <CardBody>
@@ -186,10 +190,12 @@ export default class GoalItem extends Component {
                                                     )}
                                                 </CardBody>
                                             </Card>
+                                            </div>
                                         </Col>
                                     </Row>
                                 </Col>
                                 <Col size="sm-6">
+                                    <div className="newItem">
                                     <h1>New Item</h1>
                                     <GoalInput value={this.state.actionInput}
                                                name='actionInput'
@@ -198,8 +204,11 @@ export default class GoalItem extends Component {
                                     />
 
                                     <NewGoalFormBtn onClick={this.itemFormSubmit}>Submit Item</NewGoalFormBtn>
+                                    </div>
                                 </Col>
+
                             </Row>
+                            </div>
                         </Container>
                     )
                 }
