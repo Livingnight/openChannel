@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Button, Nav, NavItem } from 'react-bootstrap';
 import './Nav.css';
+
 // import './App.css';
 
 
@@ -53,9 +54,10 @@ export default class Navi extends Component {
 
                                 <li><Button
                                     id="qsLogoutBtn"
+
                                     bsStyle="primary"
                                     className="btn-margin"
-                                    onClick={this.logout.bind(this)}
+                                    onClick={this.goTo.bind(this, 'goals')}
                                 >
                                     {/*<p>Logged in as {localStorage.getItem('user_email')}</p>*/}
                                     Log Out
@@ -67,6 +69,7 @@ export default class Navi extends Component {
                         </ul>
                     </Navbar.Header>
                 </Navbar>
+
         );
     }
 }
