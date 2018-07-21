@@ -24,46 +24,56 @@ export default class Nav extends Component {
         return (
 
             <div>
-                {console.log(this.props)}
-                <Navbar fluid>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="/">openChannel</a>
-                        </Navbar.Brand>
-                        <Button
-                            bsStyle="primary"
-                            className="btn-margin"
-                            onClick={this.goTo.bind(this, 'goals')}
-                        >
-                            Goals
-                        </Button>
-                        {
-                            !isAuthenticated() && (
+
+                {isAuthenticated() ?
+                    <div>
+                        {console.log(this.props)}
+                        <Navbar fluid>
+                            <Navbar.Header>
+                                <Navbar.Brand>
+                                    <a href="/">openChannel</a>
+                                </Navbar.Brand>
                                 <Button
-                                    id="qsLoginBtn"
                                     bsStyle="primary"
                                     className="btn-margin"
-                                    onClick={this.login.bind(this)}
+                                    onClick={this.goTo.bind(this, 'goals')}
                                 >
-                                    Log In
+                                    Goals
                                 </Button>
-                            )
-                        }
-                        {
-                            isAuthenticated() && (
-                                <Button
-                                    id="qsLogoutBtn"
-                                    bsStyle="primary"
-                                    className="btn-margin"
-                                    onClick={this.logout.bind(this)}
-                                >
-                                    Log Out
-                                </Button>
-                            )
-                        }
-                    </Navbar.Header>
-                </Navbar>
+                                {
+                                    !isAuthenticated() && (
+                                        <Button
+                                            id="qsLoginBtn"
+                                            bsStyle="primary"
+                                            className="btn-margin"
+                                            onClick={this.login.bind(this)}
+                                        >
+                                            Log In
+                                        </Button>
+                                    )
+                                }
+                                {
+                                    isAuthenticated() && (
+                                        <Button
+                                            id="qsLogoutBtn"
+                                            bsStyle="primary"
+                                            className="btn-margin"
+                                            onClick={this.logout.bind(this)}
+                                        >
+                                            Log Out
+                                        </Button>
+                                    )
+                                }
+                            </Navbar.Header>
+                        </Navbar>
+                    </div>
+                :
+                    null
+                }
+
             </div>
+
+
         );
     }
 }
