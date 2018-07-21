@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import './App.css';
-import employee from "./employee.json";
 
 export default class App extends Component {
     goTo(route) {

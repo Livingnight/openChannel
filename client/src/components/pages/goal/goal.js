@@ -4,6 +4,7 @@ import { Container, Col, Row } from "../../Grid";
 import { GoalInput, NewGoalFormBtn } from '../../form'
 import { Card, CardBody, CardHeader } from "../../card";
 import styles from './goal.css';
+
 import API from "../../../utils/API";
 
 export default class Goal extends Component {
@@ -112,7 +113,7 @@ export default class Goal extends Component {
 
 
                                                                 <CardBody key={i}>
-                                                                    <p>{goal.title}
+                                                                    <p className='goalTitle'>{goal.title}
                                                                         <Link to={{
                                                                             pathname: `/goalItem/${goal._id}`,
                                                                             state: { test: this.state.goals[i] }

@@ -24,10 +24,11 @@ h2 {
     margin-top: 15px;
 }
 
-/* .card-body {
+.card-body {
     margin: 0px !important;
+    margin-left: 10px !important;
     padding: 0px !important;
-} */
+}
 
 .feedbackDisplay{
     color: white;
@@ -49,8 +50,14 @@ h2 {
     /* float: right; */
 }
 
+.goalTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 
 .addNew {
     background-color: #39C4B6 !important;
     border-color: #39C4B6 !important;
     border-radius: 20px !important;
-}
+} */

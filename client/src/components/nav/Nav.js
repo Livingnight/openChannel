@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import './Nav.css';
-import logo from "../../images/openChannel_logo.png";
+import logo from "../../Images/openChannel_logo.png";
 // import './App.css';
 
 
@@ -68,7 +68,7 @@ export default class Nav extends Component {
                                 className="btn-margin"
                                 onClick={this.logout.bind(this)}
                                 >
-                                    Log Out
+                                    Goals
                                 </Button>
                             )
                         }
@@ -76,6 +76,8 @@ export default class Nav extends Component {
                     {/* </Navbar.Header> */}
                 </Navbar>
             </div>
+
+
         );
     }
 }

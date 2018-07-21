@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import { Container, Col, Row } from "../../Grid";
 import { GoalInput, NewGoalFormBtn } from '../../form'
 import { Card, CardBody } from "../../card";
 import API from "../../../utils/allEmployeeAPI";
-import "./home.css"
+import './home.css';
+import logo from "../../../Images/openChannel_indexpic.png";
+import openChannel from "../../../Images/openChannel_logo.png"
 
 
 export default class Home extends Component {
@@ -19,6 +21,7 @@ export default class Home extends Component {
         itemId: ''
 
     };
+
     componentDidMount() {
         this.loadGoals(this.state.email);
         if (this.props.auth.isAuthenticated()) {
@@ -26,6 +29,7 @@ export default class Home extends Component {
         }
 
     }
+
     handleChange = event => {
         const { name, value } = event.target;
         console.log(`name: ${name}, value: ${value}`);
@@ -56,12 +60,13 @@ export default class Home extends Component {
     getUser = () => {
         console.log(localStorage.getItem('user_email'));
     }
+
     login() {
         this.props.auth.login();
     }
 
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const {isAuthenticated} = this.props.auth;
         return (
             <div>
                 {
@@ -135,20 +140,44 @@ export default class Home extends Component {
                 }
                 {
                     !isAuthenticated() && (
-                        <Container>
-                            <div className='jumbotron'>
-                                <h4>
-                                    Welcome to openChannel! Please{' '}
+
+                        <Container fluid>
+                            <Row>
+                                <Col size='6'>
+                                    <img src={logo} alt="openChannel logo" className="homelogo" width={'100%'}/>
+                                </Col>
+
+                                <Col size='6'>
+                                    <div className="loginColumn">
+                                    <img src={openChannel} alt="openChannel2" className="openChannel" width={'40%'}/>
                                     <a
-                                        style={{ cursor: 'pointer' }}
+                                        style={{cursor: 'pointer'}}
                                         onClick={this.login.bind(this)}
                                     >
+                                        <br/>
                                         <button className='btn btn-success'>Log In</button>
                                     </a>
-                                    {' '}to continue.
-                        </h4>
-                            </div>
-                        </Container>
+                                    </div>
+                                </Col>
+
+                            </Row>
+                            {/*<div className="homelogo">*/}
+                            {/*/!*<img src={logo} alt="openChannel logo" className="homelogo" width={'625'}/>*!/*/}
+                            {/*<div className='jumbotron'>*/}
+                            {/*<div>*/}
+                            {/*<img src={openChannel} alt="openChannel2" className="openChannel" width={'400'}/>*/}
+                            {/*<a*/}
+                            {/*style={{cursor: 'pointer'}}*/}
+                            {/*onClick={this.login.bind(this)}*/}
+                            {/*>*/}
+                            {/*<br/>*/}
+                            {/*<button className='btn btn-success'>Log In</button>*/}
+                            {/*</a>*/}
+                            {/*{' '}*/}
+                            {/*</div>*/}
+                            {/*</div>*/}
+                            {/*</div>*/}
+                         </Container>
                     )
                 }
             </div>
