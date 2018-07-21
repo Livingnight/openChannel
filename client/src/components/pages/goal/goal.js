@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
+import './goal.css';
 import styles from './goal.css';
+
 import API from "../../../utils/API";
 
 export default class Goal extends Component {
