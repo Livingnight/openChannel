@@ -5,7 +5,7 @@ import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
 import './home.css';
 import logo from "../../../Images/openChannel_indexpic.png";
-import openChannel from "../../../Images/openChannel_indexlogo.png"
+import openChannel from "../../../Images/openChannel_indexlogo.png";
 import API from "../../../utils/API";
 import itemAPI from '../../../utils/itemAPI'
 

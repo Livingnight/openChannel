@@ -7,7 +7,7 @@ import './goal.css';
 import styles from './goal.css';
 
 import API from "../../../utils/API";
-import Navi from "../../nav/Nav";
+import Navi from "../../Nav/Nav";
 
 export default class Goal extends Component {
     state = {
