@@ -114,8 +114,8 @@ export default class Home extends Component {
                                     {this.state.goals.items ?
                                         this.state.goals.items.map( (item, i) => (
                                             <Card key={i}>
-                                                {item.author}
-                                                {item.text}
+                                                <p>{item.author}</p>
+                                                <p>{item.text}</p>
                                             </Card>
                                         )) :
                                         <Card>
