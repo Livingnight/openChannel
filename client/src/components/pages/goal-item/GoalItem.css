@@ -36,6 +36,7 @@
 .updateButton {
     background-color: #4CAF50;
     display: flex;
+    width: 5vw;
     flex-direction: row;
     border-radius: 12px;
 
@@ -43,8 +44,8 @@
 
 .inProgress {
     background-color: #4CAF50;
-    width: 10vw;
+    width: 12vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border-radius: 12px;
 }
