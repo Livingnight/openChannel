@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
-import API from "../../../utils/allEmployeeAPI";
 import './home.css';
 import logo from "../../../Images/openChannel_indexpic.png";
 import openChannel from "../../../Images/openChannel_indexlogo.png"
@@ -40,9 +39,9 @@ export default class Home extends Component {
                 console.log('goal: ', goal);
                 this.setState({
                     goalInput: '',
-                    goals: goal.data[0],
-                    items: goal.data[0].items,
-                    author: goal.data[0].author,
+                    goals: goal.data ? goal.data[0] : {},
+                    items: goal.data ? goal.data[0].items : [],
+                    author: localStorage.getItem('user_email'),
 
                 })
             })
