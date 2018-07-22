@@ -12,7 +12,7 @@ import GoalItem from './components/pages/goal-item/GoalItem';
 
 // import Nav from './components/Nav/Nav';
 // import GoalItem from './components/goal-item/GoalItem';
-// import './components/pages/landing/home.css';
+import './components/pages/landing/home.css';
 
 
 const auth = new Auth();
