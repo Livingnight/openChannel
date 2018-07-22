@@ -7,7 +7,7 @@ import styles from './item.css';
 import API from "../../../utils/API";
 import {ItemInput} from "../../form/item-input";
 import {NewItemFormBtn} from "../../form/newItemFormBtn";
-import Navi from "../../nav/Nav";
+import Navi from "../../Nav/Nav";
 
 export default class Item extends Component {
     state = {

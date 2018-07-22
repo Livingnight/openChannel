@@ -3,10 +3,9 @@ import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
 import {Card, CardBody} from "../../card";
-import API from "../../../utils/allEmployeeAPI";
 import './home.css';
 import logo from "../../../Images/openChannel_indexpic.png";
-import openChannel from "../../../Images/openChannel_indexlogo.png"
+import openChannel from "../../../Images/openChannel_indexlogo.png";
 import API from "../../../utils/API";
 import itemAPI from '../../../utils/itemAPI'
 

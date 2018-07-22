@@ -7,7 +7,7 @@ import Callback from './components/callback/Callback';
 import Auth from './Auth/Auth';
 import history from './history/history';
 
-import Navi from './components/nav/Nav';
+import Navi from './components/Nav/Nav';
 import GoalItem from './components/pages/goal-item/GoalItem';
 
 // import Nav from './components/Nav/Nav';
