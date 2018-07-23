@@ -21,14 +21,10 @@ export default class Home extends Component {
     };
     componentWillMount() {
         this.loadGoals();
-        if(this.props.auth.isAuthenticated()){
-            this.getUser(localStorage.getItem("id_token"))
-        }
 
     }
     handleChange = event => {
         const {name, value} = event.target;
-        console.log(`name: ${name}, value: ${value}`);
         this.setState({
             [name]: value
         })
@@ -36,11 +32,11 @@ export default class Home extends Component {
     loadGoals = () => {
         API.getAllEmployeeGoals()
             .then( goal => {
-                console.log('goal: ', goal);
+                console.log(goal.data);
                 this.setState({
                     goalInput: '',
-                    goals: goal.data ? goal.data[0] : {},
-                    items: goal.data ? goal.data[0].items : [],
+                    goals: goal.data[0] || {},
+                    items: goal.data.items || [],
                     author: localStorage.getItem('user_email'),
 
                 })
@@ -58,9 +54,6 @@ export default class Home extends Component {
                 console.log(response);
                 this.loadGoals();
             })
-    };
-    getUser = () => {
-        console.log(localStorage.getItem('user_email'));
     };
     login() {
         this.props.auth.login();

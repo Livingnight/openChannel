@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn} from '../../form'
-import {Card, CardBody, CardHeader} from "../../card";
+import {Card, CardBody} from "../../card";
 import API from '../../../utils/API';
 import itemAPI from '../../../utils/itemAPI';
 import {TextArea} from "../../form/TextArea";
@@ -96,10 +96,6 @@ export default class GoalItem extends Component {
             })
 
     };
-    setStyle = (complete) => {
-        let style;
-        complete ? style={'text-decoration': 'line-through'} : ''
-    }
     itemFormSubmit = event => {
         event.preventDefault();
         console.log('button works');
@@ -114,9 +110,6 @@ export default class GoalItem extends Component {
     };
     render() {
         const {isAuthenticated} = this.props.auth;
-        const style = {
-            'text-decoration': this
-        }
 
         return (
             <div>
@@ -170,7 +163,7 @@ export default class GoalItem extends Component {
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
                                                                     <CardBody>
-                                                                        <h4 style={{'text-decoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
+                                                                        <h4 style={{'textDecoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
                                                                         <button
                                                                             onClick={() => this.deleteItem(item._id, {id: this.state.id})}
                                                                             className={`btn btn-warning`}>Delete

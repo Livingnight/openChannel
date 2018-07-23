@@ -17,7 +17,6 @@ export default {
         console.log();
         return axios.get('/api/goals/all')
             .then(function (response) {
-                console.log(response);
                 return response;
             })
             .catch(function (error) {

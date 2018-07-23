@@ -1,17 +1,14 @@
 import React from 'react';
 import {Route, Router} from 'react-router-dom'
 import Goal from './components/pages/goal/goal';
-import Items from './components/pages/item/item';
 import Home from './components/pages/landing/home'
 import Callback from './components/callback/Callback';
 import Auth from './Auth/Auth';
 import history from './history/history';
 
-import Navi from './components/Nav/Nav';
+import Navi from './components/nav/Nav';
 import GoalItem from './components/pages/goal-item/GoalItem';
 
-// import Nav from './components/Nav/Nav';
-// import GoalItem from './components/goal-item/GoalItem';
 import './components/pages/landing/home.css';
 
 

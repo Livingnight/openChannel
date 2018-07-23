@@ -4,10 +4,8 @@ import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
 import './goal.css';
-import styles from './goal.css';
 
 import API from "../../../utils/API";
-import Navi from "../../Nav/Nav";
 
 export default class Goal extends Component {
     state = {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, Button, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Button } from 'react-bootstrap';
 import './Nav.css';
-// import './App.css';
 
 
 export default class Navi extends Component {
@@ -27,7 +26,6 @@ export default class Navi extends Component {
 
                 {isAuthenticated() ?
                     <div>
-                        {console.log(this.props)}
                         <Navbar fluid>
                             <Navbar.Header>
                                 <Navbar.Brand>
