@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import './Nav.css';
+import logo from "../../Images/openChannel_logo.png";
 // import './App.css';
+
+
 
 export default class Nav extends Component {
     goTo(route) {
         this.props.history.replace(`/${route}`)
     }
+
 
     login() {
         this.props.auth.login();
@@ -22,20 +27,21 @@ export default class Nav extends Component {
 
             <div>
                 {console.log(this.props)}
-                <Navbar fluid>
-                    <Navbar.Header>
+                <Navbar className= "Navbar" fluid>
+                    {/* <Navbar.Header> */}
                         <Navbar.Brand>
-                            <a href="/">openChannel</a>
+                            <a href="/"><img className="logo" src={logo}/></a>
                         </Navbar.Brand>
+                        <div className= "nav-buttons">
                         <Button
-                            bsStyle="primary"
+                            bsStyle="link"
                             className="btn-margin"
                             onClick={this.goTo.bind(this, 'goals')}
                         >
                             Goals
                         </Button>
                         <Button
-                            bsStyle="primary"
+                            bsStyle="link"
                             className="btn-margin"
                             onClick={this.goTo.bind(this, 'goalItems')}
                         >
@@ -43,38 +49,35 @@ export default class Nav extends Component {
                         </Button>
                         {
                             !isAuthenticated() && (
-                                //<div>
-                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
-                                    bsStyle="primary"
+                                    // bsStyle="link"
                                     className="btn-margin"
                                     onClick={this.login.bind(this)}
                                 >
                                     Log In
                                 </Button>
-                                // </div>
                             )
+                            
                         }
                         {
                             isAuthenticated() && (
-                                /*<div>*/
                                 <Button
-                                    id="qsLogoutBtn"
-                                    bsStyle="primary"
-                                    className="btn-margin"
-                                    onClick={this.logout.bind(this)}
+                                id="qsLogoutBtn"
+                                bsStyle="link"
+                                className="btn-margin"
+                                onClick={this.logout.bind(this)}
                                 >
-                                    Log Out
+                                    Goals
                                 </Button>
-                                // <h4>Welcome to our site! Click home to see your goals</h4>
-
-                                // </div>
                             )
                         }
-                    </Navbar.Header>
+                        </div>
+                    {/* </Navbar.Header> */}
                 </Navbar>
             </div>
+
+
         );
     }
 }

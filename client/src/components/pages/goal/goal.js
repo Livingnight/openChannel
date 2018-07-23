@@ -1,44 +1,61 @@
-import React, {Component} from 'react';
-// import Goal from '../goal/goal'
-import {Container, Col, Row} from "../../Grid";
-import {GoalInput, NewGoalFormBtn } from '../../form'
-import {Card, CardBody, CardHeader} from "../../card";
-import jwtDecode from "jwt-decode";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
+import { Container, Col, Row } from "../../Grid";
+import { GoalInput, NewGoalFormBtn } from '../../form'
+import { Card, CardBody, CardHeader } from "../../card";
 import styles from './goal.css';
+
 import API from "../../../utils/API";
+
 export default class Goal extends Component {
     state = {
         goalInput: '',
         goals: [],
         items: [],
+        showModal: false,
         email: '',
-        user: '',
-        userId: '',
         goalId: '',
         itemId: ''
 
     };
 
-    componentDidMount() {
+    componentWillMount() {
         const { isAuthenticated } = this.props.auth;
-        if(this.props.auth.isAuthenticated()){
-            this.getUser(localStorage.getItem("id_token"))
+        if (isAuthenticated()) {
+            this.getUser(localStorage.getItem("user_email"))
         }
-
+        this.loadGoals(localStorage.getItem("user_email"));
+        console.log(styles);
     }
+    // componentDidMount() {
+    // const { isAuthenticated } = this.props.auth;
+    // if(isAuthenticated()){
+    //     this.getUser(localStorage.getItem("user_email"))
+    // }
+    // }
 
     handleChange = event => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         console.log(`name: ${name}, value: ${value}`);
         this.setState({
             [name]: value
         })
     };
-    loadGoals = () => {
-        API.getGoals()
+    deleteGoal = id => {
+        API.deleteGoal(id)
             .then(goal => {
+                console.log(goal);
+                this.loadGoals(this.state.email);
+            })
+    }
+    loadGoals = (email) => {
+        console.log(email);
+        API.getGoals(email)
+            .then(goal => {
+                console.log(`Goals: ${goal.data}`);
                 this.setState({
-                    goals: goal.data
+                    goals: goal.data,
+                    goalInput: ''
                 })
             })
 
@@ -47,26 +64,34 @@ export default class Goal extends Component {
     goalFormSubmit = event => {
         event.preventDefault();
         API.saveGoal({
-            title: this.state.goalInput
+            title: this.state.goalInput,
+            email: this.state.email
         })
             .then(response => {
-                this.loadGoals();
+                console.log(`response: ${response}`);
+                this.loadGoals(this.state.email);
             })
     };
-    getUser = token => {
-        const userInfo = jwtDecode(token);
-        console.log(userInfo);
+    // handleComplete = (id, data) => {
+    //     console.log('data', data);
+    //     API.updateGoal(id, data)
+    //         .then(response => {
+    //             this.loadGoals(this.state.email);
+    //         })
+    // }
+    getUser = () => {
+        // console.log(localStorage.getItem('user_email'));
         this.setState({
-            email: userInfo.email
+            email: localStorage.getItem('user_email')
         })
-    }
+    };
 
     login() {
         this.props.auth.login();
     }
 
     render() {
-        const {isAuthenticated} = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
         return (
             <div>
                 {
@@ -76,28 +101,85 @@ export default class Goal extends Component {
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
-                                            <Card className={`card stuff`} style={styles.stuff}>
-                                                <CardHeader>These are the active goals</CardHeader>
-                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
+                                            <h1>Working on...</h1>
+                                            <Card className="cardStuff">
+                                                {/* <CardHeader>These are the active goals</CardHeader> */}
+                                                <CardBody>
+                                                    {this.state.goals.length ? (
+                                                        <Card>
+
+                                                            {this.state.goals.map((goal, i) => (
+                                                                !goal.complete &&
+
+
+                                                                <CardBody key={i}>
+                                                                    <p className='goalTitle'>{goal.title}
+                                                                        <Link to={{
+                                                                            pathname: `/goalItem/${goal._id}`,
+                                                                            state: { test: this.state.goals[i] }
+                                                                        }}>
+                                                                            <button
+                                                                                className={`btn btn-success manageBtn`}>Manage
+                                                                                </button>
+                                                                        </Link>
+                                                                    </p>
+
+
+
+
+                                                                </CardBody>
+
+
+                                                            ))}
+                                                        </Card>
+                                                    ) : (
+                                                            <h3>Nothing to display yet</h3>
+                                                        )}
+                                                </CardBody>
                                             </Card>
                                         </Col>
                                         <Col size="sm-12">
-                                            <Card className={'card'}>
-                                                <CardHeader className={'cardHeader stuff2'}>These are the completed goals</CardHeader>
-                                                <CardBody>Titles of Goals(click to see goal items)</CardBody>
-                                            </Card>
-                                        </Col>
+                                            <h1>Completed</h1>
+                                            <Card className="cardStuff">
+                                                {/* <CardHeader>These are the completed goals</CardHeader> */}
+                                                <CardBody>
+                                                    {this.state.goals.length ? (
+                                                        <Card>
+                                                            {this.state.goals.map((goal, i) => (
+                                                                goal.complete &&
+                                                                <CardBody key={i}>
+                                                                    <h3>{goal.title}
+                                                                        <Link to={{
+                                                                            pathname: `/goalItem/${goal._id}`,
+                                                                            state: { test: this.state.goals[i] }
+                                                                        }}>
+                                                                            <button
+                                                                                className={'btn btn-success'}>Manage
+                                                                            </button>
+                                                                        </Link>
+                                                                    </h3>
+                                                                </CardBody>
+
+                                                            ))}
+                                                        </Card>
+                                                    ) : (
+                                                            <h3>Nothing to display yet</h3>
+                                                        )}
+                                                </CardBody>
+                                            </Card>                                        </Col>
                                     </Row>
                                 </Col>
                                 <Col size="sm-6">
-                                    <h1>New Goal</h1>
-                                    <GoalInput value={this.state.goalInput}
-                                               name='goalInput'
-                                               placeholder='Enter Goal Title'
-                                               onChange={this.handleChange}
-                                    />
+                                    <div className="newGoalSection">
+                                        <h2>New Goal</h2>
+                                        <GoalInput className="feedbackDisplay"value={this.state.goalInput}
+                                            name='goalInput'
+                                            placeholder='Enter Goal Title'
+                                            onChange={this.handleChange}
+                                        />
 
-                                    <NewGoalFormBtn>Create Goal</NewGoalFormBtn>
+                                        <NewGoalFormBtn className= "manageBtn"onClick={this.goalFormSubmit}>Add new goal</NewGoalFormBtn>
+                                    </div>
                                 </Col>
                             </Row>
 
@@ -111,7 +193,7 @@ export default class Goal extends Component {
                         <h4>
                             You are not logged in! Please{' '}
                             <a
-                                style={{cursor: 'pointer'}}
+                                style={{ cursor: 'pointer' }}
                                 onClick={this.login.bind(this)}
                             >
                                 Log In

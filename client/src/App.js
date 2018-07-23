@@ -9,6 +9,7 @@ export default class App extends Component {
 
     login() {
         this.props.auth.login();
+
     }
 
     logout() {
@@ -43,8 +44,8 @@ export default class App extends Component {
                         </Button>
                         {
                             !isAuthenticated() && (
-                                //<div>
-                                // <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
+                                <div>
+                                <h4> Welcome to our site! Log in and Go to home to see your goals.</h4>
                                 <Button
                                     id="qsLoginBtn"
                                     bsStyle="primary"
@@ -53,12 +54,12 @@ export default class App extends Component {
                                 >
                                     Log In
                                 </Button>
-                                // </div>
+                                </div>
                             )
                         }
                         {
                             isAuthenticated() && (
-                                /*<div>*/
+                                <div>
                                 <Button
                                     id="qsLogoutBtn"
                                     bsStyle="primary"
@@ -67,6 +68,10 @@ export default class App extends Component {
                                 >
                                     Log Out
                                 </Button>
+
+                                    <br/>
+
+                                    <h4>Welcome to openChannel!! </h4>
                                     // <h4>Welcome to our site! Click home to see your goals</h4>
 
                                 // </div>
@@ -78,3 +83,4 @@ export default class App extends Component {
         );
     }
 }
+
