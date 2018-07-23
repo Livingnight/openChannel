@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import {Container, Col, Row} from "../../Grid";
 import {GoalInput, NewGoalFormBtn } from '../../form'
 import {Card, CardBody, CardHeader} from "../../card";
+import CompleteModal from '../../modal/completeModal';
+import CreateModal from '../../modal/createModal';
 import './goal.css';
 
 import API from "../../../utils/API";
@@ -11,11 +13,9 @@ export default class Goal extends Component {
     state = {
         goalInput: '',
         goals: [],
-        items: [],
-        showModal: false,
+        showCompleteModal: false,
+        showCreateModal: false,
         email: '',
-        goalId: '',
-        itemId: ''
 
     };
 
@@ -32,7 +32,18 @@ export default class Goal extends Component {
         //     this.getUser(localStorage.getItem("user_email"))
         // }
     // }
-
+    setCompleteModal = (show) => {
+        if ( show ) {
+            console.log('complete show is true');
+            this.setState({ showCompleteModal: true });
+        } else this.setState({ showCompleteModal: false });
+    }
+    setCreateModal = (show) => {
+        if ( show ) {
+            console.log('show is true');
+            this.setState({ showCreateModal: true });
+        } else this.setState({ showCreateModal: false });
+    }
     handleChange = event => {
         const {name, value} = event.target;
         console.log(`name: ${name}, value: ${value}`);
@@ -61,6 +72,7 @@ export default class Goal extends Component {
     };
 
     goalFormSubmit = event => {
+        this.setState({showCreateModal: true});
         event.preventDefault();
         API.saveGoal({
             title: this.state.goalInput,
@@ -69,6 +81,8 @@ export default class Goal extends Component {
         })
             .then(response => {
                 console.log(`response: ${response}`);
+                console.log(this.state.showCreateModal);
+                this.setCreateModal(this.state.showCreateModal);
                 this.loadGoals(this.state.email);
             })
     };
@@ -102,6 +116,8 @@ export default class Goal extends Component {
                                 <Col size='sm-6'>
                                     <Row>
                                         <Col size="sm-12">
+                                            <CompleteModal showModal={this.state.showCompleteModal} completeModal="Goal" />
+                                            <CreateModal show_modal={this.state.showCreateModal} completeModal="Goal"/>
                                             <h1>Goals</h1>
                                             <Card className={`card stuff`}>
                                                 <CardHeader>These are the active goals</CardHeader>

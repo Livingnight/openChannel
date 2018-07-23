@@ -74,16 +74,6 @@ export default class Home extends Component {
 
                                         <CardBody>
 
-                                                {/*<h3>*/}
-
-                                                {/*Do you see any Teletubbies in here? Do you see a slender plastic tag*/}
-                                                {/*clipped to my shirt with my name printed on it? Do you see a little*/}
-                                                {/*Asian child with a blank expression on his face sitting outside on a*/}
-                                                {/*mechanical helicopter that shakes when you put quarters in it? No? Well,*/}
-                                                {/*that's what you see at a toy store. And you must think you're in a toy*/}
-                                                {/*store, because you're here shopping for an infant named Jeb.*/}
-
-                                                {/*</h3>*/}
                                             {this.state.goals ?
                                                 <h3>{this.state.goals.title}</h3> :
                                                 <h3>Nothing to display</h3>

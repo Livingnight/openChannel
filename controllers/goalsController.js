@@ -7,7 +7,7 @@ module.exports = {
         db.Goal
             .find()
             .populate('items')
-            .sort({ created: -1 })
+            .sort({ _id: -1 })
             .then(dbopenChannel => {
 
                 const filter = dbopenChannel.filter(goal => goal.author === req.query.author && goal.allEmployee === false);
