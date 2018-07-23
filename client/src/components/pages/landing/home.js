@@ -68,11 +68,11 @@ export default class Home extends Component {
                         <Container fluid>
                             <Row>
                                 <Col size="sm-6">
-                                    <h1>Pipeline</h1>
+                                    <h1>PIPELINE</h1>
 
                                     <Card>
 
-                                        <CardBody>
+                                        <CardBody className="text-box">
 
                                             {this.state.goals ?
                                                 <h3>{this.state.goals.title}</h3> :
@@ -83,6 +83,7 @@ export default class Home extends Component {
 
                                     </Card>
                                     <GoalInput
+                                        className="feedbackInput"
                                         value={this.state.goalInput}
                                         name='goalInput'
                                         placeholder='Feedback'
@@ -93,26 +94,27 @@ export default class Home extends Component {
                                 </Col>
 
                                 <Col size='sm-6'>
-                                    <h1>Feedback</h1>
+                                    <div className="feedback">
+                                    <h2>Feedback</h2>
+                                        <div className='feedbackDisplay'>
                                     {this.state.goals.items ?
                                         this.state.goals.items.map( (item, i) => (
                                             <Card key={i}>
-                                                <p>{item.author}</p>
-                                                <p>{item.text}</p>
+                                                <h5>{item.author}</h5>
+                                                <p id='comment'>{item.text}</p>
                                             </Card>
                                         )) :
                                         <Card>
                                             <p>No items to display yet</p>
                                         </Card>
                                     }
+                                    </div>
+                                </div>
 
 
                                 </Col>
                             </Row>
-
-
                         </Container>
-
                     )
                 }
                 {
@@ -138,22 +140,7 @@ export default class Home extends Component {
                                 </Col>
 
                             </Row>
-                            {/*<div className="homelogo">*/}
-                            {/*/!*<img src={logo} alt="openChannel logo" className="homelogo" width={'625'}/>*!/*/}
-                            {/*<div className='jumbotron'>*/}
-                            {/*<div>*/}
-                            {/*<img src={openChannel} alt="openChannel2" className="openChannel" width={'400'}/>*/}
-                            {/*<a*/}
-                            {/*style={{cursor: 'pointer'}}*/}
-                            {/*onClick={this.login.bind(this)}*/}
-                            {/*>*/}
-                            {/*<br/>*/}
-                            {/*<button className='btn btn-success'>Log In</button>*/}
-                            {/*</a>*/}
-                            {/*{' '}*/}
-                            {/*</div>*/}
-                            {/*</div>*/}
-                            {/*</div>*/}
+
                          </Container>
                     )
                 }

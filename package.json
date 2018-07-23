@@ -10,7 +10,7 @@
     "seed": "node scripts/userSeed.js",
     "client": "cd client && npm run start",
     "build": "cd client && npm run build",
-    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
+    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push openchannel master",
     "server": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"

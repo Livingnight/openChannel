@@ -29,7 +29,7 @@ export default class Navi extends Component {
                         <Navbar fluid>
                             <Navbar.Header>
                                 <Navbar.Brand>
-                                    <a href="/">openChannel</a>
+                                    <a href="/"><img className='logo' src={logo} /></a>
                                 </Navbar.Brand>
                                 <Button
                                     bsStyle="primary"
