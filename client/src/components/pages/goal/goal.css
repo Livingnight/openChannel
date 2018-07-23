@@ -22,6 +22,7 @@ h2 {
     margin-left: 20px;
     width: 42vw;
     margin-top: 15px;
+    height: 30vh;
 }
 
 .card-body {
@@ -35,7 +36,7 @@ h2 {
     background-color: #106374;
     border: 2px solid #2FD2B0;
     border-radius: 12px;
-    margin-left: 20px;
+    margin-left: 40px;
     width: 42vw;
     height: 50vh;
     margin-top: 15px;
@@ -54,6 +55,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+    padding: 0px !important;
 }
 /* 
 .addNew {
@@ -61,3 +64,11 @@ h2 {
     border-color: #39C4B6 !important;
     border-radius: 20px !important;
 } */
+.goalInput {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+}
+
+text {
+    color: white;
+}
