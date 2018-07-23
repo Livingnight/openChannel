@@ -133,6 +133,7 @@ export default class GoalItem extends Component {
 
                                     <Row>
                                         <Col size='sm-4'></Col>
+
                                         <Col size='sm-4'>
                                             <TextArea placeholder={'further describe your purpose'}
                                                       value={this.state.textarea} onChange={this.handleChange}/>
@@ -162,18 +163,18 @@ export default class GoalItem extends Component {
                                     <Row>
                                         <Col size="sm-12">
                                             <div className='itemsSection'>
-                                            <h1>Items</h1>
+                                            <h1>To Do</h1>
                                             <Card className={`card stuff`}>
                                                 <CardBody>
                                                     {this.state.goal.items.length > 0 ? (
-                                                        <div>
+                                                        <div className='newItems' >
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
                                                                     <CardBody>
                                                                         <h4 style={{'text-decoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
                                                                         <button
                                                                             onClick={() => this.deleteItem(item._id, {id: this.state.id})}
-                                                                            className={`btn btn-warning`}>Delete
+                                                                            className={`btn btn-warning deleteBtn`}>Delete
                                                                         </button>
                                                                         <TextBox
                                                                             checked={item.complete}
