@@ -168,16 +168,16 @@ export default class Goal extends Component {
                                                             {this.state.goals.map((goal, i) => (
                                                                 goal.complete &&
                                                                 <CardBody key={i}>
-                                                                    <h3>{goal.title}
+                                                                    <p className='goalTitle'>{goal.title}
                                                                         <Link to={{
                                                                             pathname: `/goalItem/${goal._id}`,
                                                                             state: {test: this.state.goals[i]}
                                                                         }}>
                                                                             <button
-                                                                                className={'btn btn-success'}>Manage
+                                                                                className={'btn btn-success manageBtn'}>Manage
                                                                             </button>
                                                                         </Link>
-                                                                    </h3>
+                                                                    </p>
                                                                 </CardBody>
 
                                                             ))}

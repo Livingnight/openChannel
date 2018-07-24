@@ -18,7 +18,7 @@ h2 {
     margin-left: 20px;
     width: 42vw;
     margin-top: 15px;
-    height: 30vh;
+    /* height: 30vh; */
 }
 
 .card-body {
@@ -34,7 +34,7 @@ h2 {
     border-radius: 12px;
     margin-left: 20px;
     width: 42vw;
-    height: 50vh;
+    /* height: 50vh; */
     margin-top: 15px;
 }
 
@@ -63,6 +63,9 @@ h2 {
 .goalInput {
     font-family: 'Quicksand', sans-serif;
     font-style: italic;
+}
+.feedbackDisplay::-webkit-input-placeholder{
+    color: rgba(255, 255, 255, 0.822);
 }
 
 text {

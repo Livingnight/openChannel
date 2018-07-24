@@ -87,3 +87,9 @@ h5 {
     margin: 0px;
     padding: 10px;
 }
+
+.loginColumn {
+    background-color: #3A1741;
+    height: 100vh;
+    width: 100vw;
+}
