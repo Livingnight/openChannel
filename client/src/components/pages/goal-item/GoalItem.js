@@ -164,22 +164,26 @@ export default class GoalItem extends Component {
                                         <Col size="sm-12">
                                             <div className='itemsSection'>
                                             <h1>To Do</h1>
-                                            <Card className={`card stuff`}>
+                                            <Card className={`card-stuff`}>
                                                 <CardBody>
                                                     {this.state.goal.items.length > 0 ? (
                                                         <div className='newItems' >
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
                                                                     <CardBody>
-                                                                        <h4 style={{'text-decoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
-                                                                        <button
-                                                                            onClick={() => this.deleteItem(item._id, {id: this.state.id})}
-                                                                            className={`btn btn-warning deleteBtn`}>Delete
-                                                                        </button>
                                                                         <TextBox
                                                                             checked={item.complete}
                                                                             onClick={() => this.handleItemComplete(item._id, {complete: !item.complete})}
                                                                         />
+                                                                        <h4 style={{'text-decoration': item.complete ? 'line-through' : ''}}>{item.text}
+                                                                            <span>
+                                                                             <button
+                                                                                 onClick={() => this.deleteItem(item._id, {id: this.state.id})}
+                                                                                 className={`btn btn-warning deleteBtn`}>Delete
+                                                                             </button>
+                                                                        </span>
+                                                                        </h4>
+
                                                                     </CardBody>
                                                                 </Card>
                                                             ))}

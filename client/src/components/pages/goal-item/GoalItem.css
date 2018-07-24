@@ -5,7 +5,7 @@
     height: 400px;
     width: 90vw;
     color: #B4FEA2;
-    ont-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-style: italic;
 
 }
@@ -17,7 +17,7 @@
     height: 400px;
     width: 90vw;
     color: #B4FEA2;
-    ont-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-style: italic;
 
 }
@@ -60,10 +60,11 @@
     color: black;
     border: 4px solid #2FD2B0;
     border-radius: 12px;
-    margin-left: 20px;
+    margin-left: 25px;
     width: 42vw;
     height: max-content;
     margin-top: 15px;
+
 
 }
 
@@ -75,12 +76,32 @@
     background-color: #39C4B6 !important;
     border-color: #39C4B6 !important;
     border-radius: 20px !important;
-    display: flex;
     justify-content: space-between !important;
-     /*float: right;*/
+    align-items: center;
+    display: flex;
+    /*float: right;*/
     margin-left: 400px;
+
 }
 
 .descriptionBox {
     border: 6px solid #2FD2B0;
+}
+
+.form-check-input {
+    position: absolute;
+    margin-top: 0.3rem;
+    margin-left: -2.25rem;
+}
+
+.card-body {
+    margin: 0px !important;
+    margin-left: 20px !important;
+    padding: 0px !important;
+    background-color: #106374 !important;
+}
+
+.card-stuff {
+    background-color: #106374 !important;
+
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
-// import './Nav.css';
+import './Nav.css';
 // import './App.css';
+import logo from "../../Images/openChannel_logo.png";
 
 
 export default class Nav extends Component {
@@ -29,12 +30,13 @@ export default class Nav extends Component {
                     <div>
                         {console.log(this.props)}
                         <Navbar fluid>
+                            {/*<Navbar.Brand>*/}
                             <Navbar.Header>
                                 <Navbar.Brand>
-                                    <a href="/">openChannel</a>
+                                    <a href="/"><img className='logo' src={logo}/></a>
                                 </Navbar.Brand>
                                 <Button
-                                    bsStyle="primary"
+                                    bsStyle="link"
                                     className="btn-margin"
                                     onClick={this.goTo.bind(this, 'goals')}
                                 >
@@ -44,10 +46,11 @@ export default class Nav extends Component {
                                     !isAuthenticated() && (
                                         <Button
                                             id="qsLoginBtn"
-                                            bsStyle="primary"
+                                            bsStyle="link"
                                             className="btn-margin"
                                             onClick={this.login.bind(this)}
                                         >
+
                                             Log In
                                         </Button>
                                     )
@@ -56,7 +59,7 @@ export default class Nav extends Component {
                                     isAuthenticated() && (
                                         <Button
                                             id="qsLogoutBtn"
-                                            bsStyle="primary"
+                                            bsStyle="link"
                                             className="btn-margin"
                                             onClick={this.logout.bind(this)}
                                         >
