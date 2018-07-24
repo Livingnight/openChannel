@@ -12,7 +12,7 @@ h2 {
     font-family: 'Fredoka One', cursive;
     color: #B4FEA2;
     padding: 30px 0px 0px 30px;
-    margin-bottom: 0px;
+    margin: 0px 0px 0px 10px;
     }
 
 .cardStuff{
@@ -22,7 +22,7 @@ h2 {
     margin-left: 20px;
     width: 42vw;
     margin-top: 15px;
-    height: 30vh;
+    height: 75%;
 }
 
 .card-body {
@@ -31,15 +31,22 @@ h2 {
     padding: 0px !important;
 }
 
-.feedbackDisplay{
-    color: white;
-    background-color: #106374;
+.newGoal{
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    background-color: #106374 !important;
     border: 2px solid #2FD2B0;
     border-radius: 12px;
     margin-left: 40px;
     width: 42vw;
-    height: 50vh;
+    /* height: 50vh; */
     margin-top: 15px;
+    color: white !important;
+    padding: 10px;
+}
+.newGoal::-webkit-input-placeholder {
+    color: white;
 }
 
 .manageBtn{
@@ -48,7 +55,6 @@ h2 {
     border-radius: 20px !important;
     display: flex;
     justify-content: space-between !important;
-    /* float: right; */
 }
 
 .goalTitle{
@@ -56,7 +62,6 @@ h2 {
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    padding: 0px !important;
 }
 /* 
 .addNew {
@@ -72,3 +77,4 @@ h2 {
 text {
     color: white;
 }
+

@@ -172,13 +172,13 @@ export default class Goal extends Component {
                                 <Col size="sm-6">
                                     <div className="newGoalSection">
                                         <h2>New Goal</h2>
-                                        <GoalInput className="feedbackDisplay"value={this.state.goalInput}
+                                        <GoalInput className="newGoal"value={this.state.goalInput}
                                             name='goalInput'
                                             placeholder='Enter Goal Title'
                                             onChange={this.handleChange}
                                         />
 
-                                        <NewGoalFormBtn className= "manageBtn"onClick={this.goalFormSubmit}>Add new goal</NewGoalFormBtn>
+                                        <NewGoalFormBtn style={{marginLeft: '40px'}}onClick={this.goalFormSubmit}>Add new goal</NewGoalFormBtn>
                                     </div>
                                 </Col>
                             </Row>

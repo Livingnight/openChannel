@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const NewGoalFormBtn = props =>(
-    <button {...props} className='btn btn-success'>
+    <button {...props} style={props.style} className='btn btn-success manageBtn'>
         {props.children}
     </button>
 )
