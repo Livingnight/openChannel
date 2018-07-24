@@ -9,7 +9,7 @@ module.exports = {
             .populate('items')
             .sort({ _id: -1 })
             .then(dbopenChannel => {
-
+                console.log(dbopenChannel)
                 const filter = dbopenChannel.filter(goal => goal.author === req.query.author && goal.allEmployee === false);
                 res.json(filter)
             })
