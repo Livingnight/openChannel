@@ -9,7 +9,7 @@ h2 {
     color: #B4FEA2;
     padding: 30px 0px 0px 30px;
     margin-bottom: 0px;
-}
+    }
 
 .cardStuff{
     color: white;
@@ -18,6 +18,7 @@ h2 {
     margin-left: 20px;
     width: 42vw;
     margin-top: 15px;
+    /* height: 30vh; */
 }
 
 .card-body {
@@ -33,7 +34,7 @@ h2 {
     border-radius: 12px;
     margin-left: 20px;
     width: 42vw;
-    height: 50vh;
+    /* height: 50vh; */
     margin-top: 15px;
 }
 
@@ -50,12 +51,23 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+    padding: 0px !important;
 }
 /*
 .addNew {
     background-color: #39C4B6 !important;
     border-color: #39C4B6 !important;
     border-radius: 20px !important;
-} *//*.stuff{*/
-/*background-color: red;*/
-/*}*/
+} */
+.goalInput {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+}
+.feedbackDisplay::-webkit-input-placeholder{
+    color: rgba(255, 255, 255, 0.822);
+}
+
+text {
+    color: white;
+}
