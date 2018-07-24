@@ -2,7 +2,7 @@
   "name": "openChannel",
   "version": "0.1.0",
   "private": true,
-  "engines" : { "node" : ">=0.10.3 <0.12" },
+//  "engines" : { "node" : ">=0.10.3 <0.12" },
   "dependencies": {
     "auth0-js": "^9.6.1",
     "express": "^4.16.3",
