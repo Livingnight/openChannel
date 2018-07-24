@@ -32,8 +32,9 @@ export default class Navi extends Component {
                                 <Navbar.Brand>
                                     <a href="/"><img className='logo' src={logo} /></a>
                                 </Navbar.Brand>
+                                <div className='nav-buttons'>
                                 <Button
-                                    bsStyle="primary"
+                                    bsStyle="link"
                                     className="btn-margin"
                                     onClick={this.goTo.bind(this, 'goals')}
                                 >
@@ -43,7 +44,7 @@ export default class Navi extends Component {
                                     !isAuthenticated() && (
                                         <Button
                                             id="qsLoginBtn"
-                                            bsStyle="primary"
+                                            bsStyle="link"
                                             className="btn-margin"
                                             onClick={this.login.bind(this)}
                                         >
@@ -55,7 +56,7 @@ export default class Navi extends Component {
                                     isAuthenticated() && (
                                         <Button
                                             id="qsLogoutBtn"
-                                            bsStyle="primary"
+                                            bsStyle="link"
                                             className="btn-margin"
                                             onClick={this.logout.bind(this)}
                                         >
@@ -63,6 +64,7 @@ export default class Navi extends Component {
                                         </Button>
                                     )
                                 }
+                                </div>
                             </Navbar.Header>
                         </Navbar>
                     </div>
