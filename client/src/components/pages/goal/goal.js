@@ -121,8 +121,8 @@ export default class Goal extends Component {
                                             <h1>Working on...</h1>
                                             <Card className="cardStuff">
                                                 {/* <CardHeader>These are the active goals</CardHeader> */}
-                                            <CompleteModal showModal={this.state.showCompleteModal} completeModal="Goal" />
-                                            <CreateModal setCreateModal={this.setCreateModal} show_modal={this.state.showCreateModal} completeModal="Goal"/>
+                                            {/*<CompleteModal showModal={this.state.showCompleteModal} completeModal="Goal" />*/}
+                                                {this.state.isModal ? <CreateModal setCreateModal={this.setCreateModal} show_modal={this.state.showCreateModal} completeModal="Goal"/> : null}
 
                                                 <CardBody>
                                                     {this.state.goals.length ? (
