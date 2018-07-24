@@ -23,10 +23,10 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(MONGDB_URI, err => {
+mongoose.connect(MONGDB_URI,  err => {
     if (err) console.log(err);
     else console.log('database connected!')
-});
+} );
 
 app.listen(PORT, err => {
     if (err) console.log(err);

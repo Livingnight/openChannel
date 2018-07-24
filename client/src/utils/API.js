@@ -2,11 +2,21 @@ import axios from 'axios'
 
 export default {
 
-    getGoals: email => {
+    getGoals: (email) => {
         console.log(email);
         return axios.get('/api/goals', {params: {author: email}})
             .then(function (response) {
                 console.log(response);
+                return response;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getAllEmployeeGoals: () => {
+        console.log();
+        return axios.get('/api/goals/all')
+            .then(function (response) {
                 return response;
             })
             .catch(function (error) {
