@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    float: left;
 }
 .nav-buttons {
     font-family: 'Quicksand', sans-serif;
@@ -20,3 +19,7 @@
 .btn-margin:hover {
     color: #B4FEA2;
 }
+.navbar>.container-fluid {
+    display: inline;
+}
+
