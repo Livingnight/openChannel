@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "main": "server.js",
   "license": "MIT",
+  "engines" : { "node" : ">=0.10.3 <0.12" },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
