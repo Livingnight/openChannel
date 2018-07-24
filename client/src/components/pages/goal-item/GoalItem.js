@@ -159,14 +159,14 @@ export default class GoalItem extends Component {
                                             <Card className={`card stuff`}>
                                                 <CardBody>
                                                     {this.state.goal.items.length > 0 ? (
-                                                        <div>
+                                                        <div className='newItems'>
                                                             {this.state.goal.items.map((item) => (
                                                                 <Card key={item._id}>
                                                                     <CardBody>
                                                                         <h4 style={{'textDecoration': item.complete ? 'line-through' : ''}}>{item.text}</h4>
                                                                         <button
                                                                             onClick={() => this.deleteItem(item._id, {id: this.state.id})}
-                                                                            className={`btn btn-warning`}>Delete
+                                                                            className={`btn btn-warning deleteBtn`}>Delete
                                                                         </button>
                                                                         <TextBox
                                                                             checked={item.complete}

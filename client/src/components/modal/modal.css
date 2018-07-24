@@ -1,4 +1,4 @@
-.modal {
+.scratchModal {
     position: absolute;
     bottom: 100px;
     right: 0;
@@ -12,10 +12,10 @@
     transition: transform .8s;
 }
 
-.modal.show {
+.scratchModal.show {
     transform: translateX(0);
 }
 
-.modal button {
+.scratchModal button {
     padding: 5px 15px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import logo from '../../Images/openChannel_logo.png'
 import './Nav.css';
 
 

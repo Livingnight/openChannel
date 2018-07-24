@@ -6,6 +6,8 @@ import {Card, CardBody, CardHeader} from "../../card";
 import CompleteModal from '../../modal/completeModal';
 import CreateModal from '../../modal/createModal';
 import './goal.css';
+import '../../modal/modal.css';
+
 
 
 import API from "../../../utils/API";
@@ -73,7 +75,7 @@ export default class Goal extends Component {
     };
 
     goalFormSubmit = event => {
-        this.setState({showCreateModal: true});
+        // this.setState({showCreateModal: true});
         event.preventDefault();
         API.saveGoal({
             title: this.state.goalInput,
@@ -120,7 +122,7 @@ export default class Goal extends Component {
                                             <Card className="cardStuff">
                                                 {/* <CardHeader>These are the active goals</CardHeader> */}
                                             <CompleteModal showModal={this.state.showCompleteModal} completeModal="Goal" />
-                                            <CreateModal show_modal={this.state.showCreateModal} completeModal="Goal"/>
+                                            <CreateModal setCreateModal={this.setCreateModal} show_modal={this.state.showCreateModal} completeModal="Goal"/>
 
                                                 <CardBody>
                                                     {this.state.goals.length ? (
