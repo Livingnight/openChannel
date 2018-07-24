@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const GoalSchema = new mongoose.Schema({
+const AllEmployeeSchema = new mongoose.Schema({
     author: {
         type: String
     },
     allEmployee: {
-        type: Boolean
+        type: String,
+        default: 'AllEmployees'
     },
     title: {
         type: String,
         required: true
     },
     description: {
-      type: String,
-      default: ''
+        type: String,
+        default: ''
     },
     complete: {
         type: Boolean,
@@ -28,8 +29,8 @@ const GoalSchema = new mongoose.Schema({
         type: String,
         default: moment()
     }
+
 });
+const AllEmployee = mongoose.model("User", AllEmployeeSchema);
 
-const Goal = mongoose.model('Goal', GoalSchema);
-
-module.exports = Goal;
+module.exports = AllEmployee;

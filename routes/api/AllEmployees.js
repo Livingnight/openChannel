@@ -5,7 +5,7 @@ const allEmployeeAPI = require("../../controllers/allEmployeeController");
 
 // Matches with "/api/books"
 router.route("/")
-    .get(allEmployeeAPI.findOne)
+    .get(allEmployeeAPI.findAll)
     .post(allEmployeeAPI.create);
 
 // Matches with "/api/books/:id"

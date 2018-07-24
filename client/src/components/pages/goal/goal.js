@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { Container, Col, Row } from "../../Grid";
-import { GoalInput, NewGoalFormBtn } from '../../form'
-import { Card, CardBody, CardHeader } from "../../card";
-import styles from './goal.css';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
+import {Container, Col, Row} from "../../Grid";
+import {GoalInput, NewGoalFormBtn } from '../../form'
+import {Card, CardBody, CardHeader} from "../../card";
+import CompleteModal from '../../modal/completeModal';
+import CreateModal from '../../modal/createModal';
+import './goal.css';
+import '../../modal/modal.css';
+
+
 
 import API from "../../../utils/API";
 
@@ -11,21 +16,18 @@ export default class Goal extends Component {
     state = {
         goalInput: '',
         goals: [],
-        items: [],
-        showModal: false,
+        showCompleteModal: false,
+        showCreateModal: false,
         email: '',
-        goalId: '',
-        itemId: ''
 
     };
 
     componentWillMount() {
         const { isAuthenticated } = this.props.auth;
-        if (isAuthenticated()) {
+        if(isAuthenticated()){
             this.getUser(localStorage.getItem("user_email"))
         }
         this.loadGoals(localStorage.getItem("user_email"));
-        console.log(styles);
     }
     // componentDidMount() {
     // const { isAuthenticated } = this.props.auth;
@@ -33,9 +35,20 @@ export default class Goal extends Component {
     //     this.getUser(localStorage.getItem("user_email"))
     // }
     // }
-
+    setCompleteModal = (show) => {
+        if ( show ) {
+            console.log('complete show is true');
+            this.setState({ showCompleteModal: true });
+        } else this.setState({ showCompleteModal: false });
+    }
+    setCreateModal = (show) => {
+        if ( show ) {
+            console.log('show is true');
+            this.setState({ showCreateModal: true });
+        } else this.setState({ showCreateModal: false });
+    }
     handleChange = event => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         console.log(`name: ${name}, value: ${value}`);
         this.setState({
             [name]: value
@@ -43,7 +56,7 @@ export default class Goal extends Component {
     };
     deleteGoal = id => {
         API.deleteGoal(id)
-            .then(goal => {
+            .then( goal => {
                 console.log(goal);
                 this.loadGoals(this.state.email);
             })
@@ -62,13 +75,17 @@ export default class Goal extends Component {
     };
 
     goalFormSubmit = event => {
+        // this.setState({showCreateModal: true});
         event.preventDefault();
         API.saveGoal({
             title: this.state.goalInput,
-            email: this.state.email
+            allEmployee: false,
+            author: this.state.email
         })
             .then(response => {
                 console.log(`response: ${response}`);
+                console.log(this.state.showCreateModal);
+                this.setCreateModal(this.state.showCreateModal);
                 this.loadGoals(this.state.email);
             })
     };
@@ -91,7 +108,7 @@ export default class Goal extends Component {
     }
 
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const {isAuthenticated} = this.props.auth;
         return (
             <div>
                 {
@@ -104,6 +121,9 @@ export default class Goal extends Component {
                                             <h1>Working on...</h1>
                                             <Card className="cardStuff">
                                                 {/* <CardHeader>These are the active goals</CardHeader> */}
+                                            <CompleteModal showModal={this.state.showCompleteModal} completeModal="Goal" />
+                                            <CreateModal setCreateModal={this.setCreateModal} show_modal={this.state.showCreateModal} completeModal="Goal"/>
+
                                                 <CardBody>
                                                     {this.state.goals.length ? (
                                                         <Card>
@@ -151,7 +171,7 @@ export default class Goal extends Component {
                                                                     <h3>{goal.title}
                                                                         <Link to={{
                                                                             pathname: `/goalItem/${goal._id}`,
-                                                                            state: { test: this.state.goals[i] }
+                                                                            state: {test: this.state.goals[i]}
                                                                         }}>
                                                                             <button
                                                                                 className={'btn btn-success'}>Manage

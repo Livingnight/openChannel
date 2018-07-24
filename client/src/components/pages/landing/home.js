@@ -1,72 +1,66 @@
 import React, {Component} from 'react';
-
-import { Container, Col, Row } from "../../Grid";
-import { GoalInput, NewGoalFormBtn } from '../../form'
-import { Card, CardBody } from "../../card";
-import API from "../../../utils/allEmployeeAPI";
+import {Link} from 'react-router-dom'
+import {Container, Col, Row} from "../../Grid";
+import {GoalInput, NewGoalFormBtn} from '../../form'
+import {Card, CardBody} from "../../card";
 import './home.css';
 import logo from "../../../Images/openChannel_indexpic.png";
-import openChannel from "../../../Images/openChannel_logo.png"
+import openChannel from "../../../Images/openChannel_indexlogo.png";
+import API from "../../../utils/API";
+import itemAPI from '../../../utils/itemAPI'
 
 
 export default class Home extends Component {
     state = {
         goalInput: '',
-        goals: [],
+        goals: {},
         items: [],
-        email: 'allEmployees',
-        user: '',
-        userId: '',
-        goalId: '',
-        itemId: ''
+        author: '',
+        allEmployee: 'AllEmployees',
 
     };
-
-    componentDidMount() {
-        this.loadGoals(this.state.email);
-        if (this.props.auth.isAuthenticated()) {
-            this.getUser(localStorage.getItem("id_token"))
-        }
+    componentWillMount() {
+        this.loadGoals();
 
     }
-
     handleChange = event => {
-        const { name, value } = event.target;
-        console.log(`name: ${name}, value: ${value}`);
+        const {name, value} = event.target;
         this.setState({
             [name]: value
         })
     };
-    loadGoals = (email) => {
-        API.getGoals(email)
-            .then(goal => {
-                console.log(goal);
+    loadGoals = () => {
+        API.getAllEmployeeGoals()
+            .then( goal => {
+                console.log(goal.data);
                 this.setState({
-                    goals: goal.data
+                    goalInput: '',
+                    goals: goal.data[0] || {},
+                    items: goal.data.items || [],
+                    author: localStorage.getItem('user_email'),
+
                 })
             })
 
     };
 
-    goalFormSubmit = event => {
+    feedbackFormSubmit = event => {
         event.preventDefault();
-        API.saveGoal({
-            title: this.state.goalInput
+        itemAPI.saveItem(this.state.goals._id, {
+            text: this.state.goalInput,
+            author: this.state.author
         })
             .then(response => {
-                this.loadGoals(this.state.email);
+                console.log(response);
+                this.loadGoals();
             })
     };
-    getUser = () => {
-        console.log(localStorage.getItem('user_email'));
-    }
-
     login() {
         this.props.auth.login();
     }
 
     render() {
-        const {isAuthenticated} = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
         return (
             <div>
                 {
@@ -80,15 +74,10 @@ export default class Home extends Component {
 
                                         <CardBody className="text-box">
 
-                                            <p>
-
-                                                Do you see any Teletubbies in here? Do you see a slender plastic tag
-                                                clipped to my shirt with my name printed on it? Do you see a little
-                                                Asian child with a blank expression on his face sitting outside on a
-                                                mechanical helicopter that shakes when you put quarters in it? No? Well,
-                                                that's what you see at a toy store. And you must think you're in a toy
-                                                store, because you're here shopping for an infant named Jeb.
-                                            </p>
+                                            {this.state.goals ?
+                                                <h3>{this.state.goals.title}</h3> :
+                                                <h3>Nothing to display</h3>
+                                            }
 
                                         </CardBody>
 
@@ -100,39 +89,29 @@ export default class Home extends Component {
                                         placeholder='Feedback'
                                         onChange={this.handleChange}
                                     />
-                                    <NewGoalFormBtn>Add Feedback </NewGoalFormBtn>
-                                    <NewGoalFormBtn>Take Action </NewGoalFormBtn>
+                                    <NewGoalFormBtn onClick={this.feedbackFormSubmit}>Add Feedback</NewGoalFormBtn>
+                                    <Link to={'/goals'}><NewGoalFormBtn>Take Action </NewGoalFormBtn></Link>
                                 </Col>
-                                <Col Col size='sm-6'>
+
+                                <Col size='sm-6'>
                                     <div className="feedback">
-                                        <h2>Feedback</h2>
+                                    <h2>Feedback</h2>
                                         <div className='feedbackDisplay'>
-                                            <Card>
-                                                <CardBody>
-                                                    <h5>employee@gmail.com</h5>
-                                                    <p id='comment'>Thats a dumb thing to say</p>
-                                                </CardBody>
+                                    {this.state.goals.items ?
+                                        this.state.goals.items.map( (item, i) => (
+                                            <Card key={i}>
+                                                <h5>{item.author}</h5>
+                                                <p id='comment'>{item.text}</p>
                                             </Card>
-                                            <Card>
-                                                <CardBody>
-                                                <h5>employee@gmail.com</h5>
-                                                    <p id='comment'>Thats a dumb thing to say</p>
-                                                </CardBody>
-                                            </Card>
-                                            <Card>
-                                                <CardBody>
-                                                <h5>employee@gmail.com</h5>
-                                                    <p id='comment'>Thats a dumb thing to say</p>
-                                                </CardBody>
-                                            </Card>
-                                            <Card>
-                                                <CardBody>
-                                                <h5>employee@gmail.com</h5>
-                                                    <p id='comment'>Thats a dumb thing to say</p>
-                                                </CardBody>
-                                            </Card>
-                                        </div>
+                                        )) :
+                                        <Card>
+                                            <p>No items to display yet</p>
+                                        </Card>
+                                    }
                                     </div>
+                                </div>
+
+
                                 </Col>
                             </Row>
                         </Container>
@@ -161,22 +140,7 @@ export default class Home extends Component {
                                 </Col>
 
                             </Row>
-                            {/*<div className="homelogo">*/}
-                            {/*/!*<img src={logo} alt="openChannel logo" className="homelogo" width={'625'}/>*!/*/}
-                            {/*<div className='jumbotron'>*/}
-                            {/*<div>*/}
-                            {/*<img src={openChannel} alt="openChannel2" className="openChannel" width={'400'}/>*/}
-                            {/*<a*/}
-                            {/*style={{cursor: 'pointer'}}*/}
-                            {/*onClick={this.login.bind(this)}*/}
-                            {/*>*/}
-                            {/*<br/>*/}
-                            {/*<button className='btn btn-success'>Log In</button>*/}
-                            {/*</a>*/}
-                            {/*{' '}*/}
-                            {/*</div>*/}
-                            {/*</div>*/}
-                            {/*</div>*/}
+
                          </Container>
                     )
                 }
