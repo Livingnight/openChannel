@@ -32,7 +32,7 @@ export default class Home extends Component {
     loadGoals = () => {
         API.getAllEmployeeGoals()
             .then( goal => {
-                console.log(goal.data);
+                // console.log(goal.data);
                 this.setState({
                     goalInput: '',
                     goals: goal.data[0] || {},
