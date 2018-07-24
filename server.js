@@ -8,7 +8,7 @@ const routes = require("./routes");
 const app = express();
 
 const PORT = process.env.PORT || 8000;
-const MONGDB_URI = process.env.MONGODB_URI || 'mongodb://localhost/openChannel';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/openChannel';
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -23,10 +23,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(MONGDB_URI,  err => {
-    if (err) console.log(err);
-    else console.log('database connected!')
-} );
+mongoose.connect(MONGODB_URI);
 
 app.listen(PORT, err => {
     if (err) console.log(err);
