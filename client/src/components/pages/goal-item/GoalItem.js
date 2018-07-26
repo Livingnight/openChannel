@@ -123,7 +123,6 @@ export default class GoalItem extends Component {
                                 <Col size="sm-12">
 
                                     <button className='description' style={{textAlign: "center"}}>{this.state.goal.title}</button>
-
                                     <Row>
                                         <Col size='sm-4'></Col>
                                         <Col size='sm-4'>
@@ -155,9 +154,9 @@ export default class GoalItem extends Component {
                                     <Row>
                                         <Col size="sm-12">
                                             <div className='itemsSection'>
-                                            <h1>Items</h1>
-                                            <Card className={`card stuff`}>
-                                                <CardBody>
+                                            <h2>Items</h2>
+                                            <Card className={`card-stuff`}>
+                                                <CardBody className={'lastmin'}>
                                                     {this.state.goal.items.length > 0 ? (
                                                         <div className='newItems'>
                                                             {this.state.goal.items.map((item) => (
@@ -189,7 +188,7 @@ export default class GoalItem extends Component {
                                 </Col>
                                 <Col size="sm-6">
                                     <div className="newItem">
-                                    <h1>New Item</h1>
+                                    <h2>New Item</h2>
                                     <GoalInput value={this.state.actionInput}
                                                name='actionInput'
                                                placeholder='Enter Goal action'

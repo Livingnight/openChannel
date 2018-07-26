@@ -27,16 +27,16 @@ h2 {
     padding: 0px !important;
 }
 
-.feedbackDisplay{
-    color: white;
-    background-color: #106374;
-    border: 2px solid #2FD2B0;
-    border-radius: 12px;
-    margin-left: 20px;
-    width: 42vw;
-    /* height: 50vh; */
-    margin-top: 15px;
-}
+/*.feedbackDisplay{*/
+    /*color: white;*/
+    /*background-color: #106374;*/
+    /*border: 2px solid #2FD2B0;*/
+    /*border-radius: 12px;*/
+    /*margin-left: 20px;*/
+    /*width: 42vw;*/
+    /*!* height: 50vh; *!*/
+    /*margin-top: 15px;*/
+/*}*/
 
 .manageBtn{
     background-color: #39C4B6 !important;

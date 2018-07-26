@@ -74,7 +74,7 @@ export default class Home extends Component {
 
                                         <CardBody className="text-box">
 
-                                            {this.state.goals ?
+                                            {Object.keys(this.state.goals).length ?
                                                 <h3>{this.state.goals.title}</h3> :
                                                 <h3>Nothing to display</h3>
                                             }
@@ -128,7 +128,7 @@ export default class Home extends Component {
 
                                 <Col size='6'>
                                     <div className="loginColumn">
-                                    <img src={openChannel} alt="openChannel2" className="openChannel" width={'40%'}/>
+                                    <img src={openChannel} alt="openChannel2" className="openChannel" width={'30%'} margin={"50px"}/>
                                     <a
                                         style={{cursor: 'pointer'}}
                                         onClick={this.login.bind(this)}

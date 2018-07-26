@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
-// import logo from '../../Images/openChannel_logo.png'
+import logo from '../../Images/openChannel_logo.png'
 import './Nav.css';
 
 
@@ -30,7 +30,7 @@ export default class Navi extends Component {
                         <Navbar fluid>
                             <Navbar.Header>
                                 <Navbar.Brand>
-                                    <a href="/">openChannel</a>
+                                    <a href="/"><img src={logo} alt='openChannel' className='logo' /></a>
                                 </Navbar.Brand>
                                 <div className='nav-buttons'>
                                 <Button

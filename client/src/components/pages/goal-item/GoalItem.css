@@ -22,13 +22,13 @@
     background-color: white;
 }
 .description {
-    background-color: #3A1741;
-    color: white;
-    border-radius: 14px;
-    border: 6px solid #3A1741;
+    /*background-color: #3A1741;*/
+    color: #3A1741;
+    /*border-radius: 14px;*/
+    /*border: 6px solid #3A1741;*/
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    margin-left: 650px;
+    /*margin-left: 650px;*/
     /*margin: 10px;*/
     /*margin-left: 20px;*/
 }
@@ -63,10 +63,53 @@
     border-color: #39C4B6 !important;
     border-radius: 20px !important;
     justify-content: space-between !important;
+    display: compact;
     /*float: right;*/
     margin-left: 400px;
 }
 .descriptionBox {
     border: 6px solid #2FD2B0;
+
 }
 
+h2 {
+    color: #B4FEA2;
+}
+
+/*.card-body {*/
+    /*color: white;*/
+    /*background-color: #106374;*/
+    /*border: 2px solid #2FD2B0;*/
+    /*border-radius: 12px;*/
+    /*margin-left: 20px;*/
+    /*width: 42vw;*/
+    /*!* height: 50vh; *!*/
+    /*margin-top: 15px;*/
+/*}*/
+
+.card-stuff {
+    color: #106374;
+}
+
+.actionInput {
+    color: white;
+    background-color: #106374;
+    border: 2px solid #2FD2B0;
+    border-radius: 12px;
+    margin-left: 20px;
+    width: 42vw;
+    /* height: 50vh; */
+    margin-top: 15px;
+
+}
+
+.lastmin {
+    background-color: white;
+    color: white;
+}
+
+.form-check-input {
+    position: fixed;
+    margin-top: 0.3rem;
+    margin-left: -2.25rem;
+}
